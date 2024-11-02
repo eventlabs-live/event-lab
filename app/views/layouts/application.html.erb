@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Event Labs</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag 'application', media: 'all', "data-turbo-track": 'reload' %>
+  <%#= javascript_importmap_tags 'application', "data-turbo-track": 'reload' %>
+  <%= javascript_importmap_tags %>
+  <%#= favicon_link_tag asset_path('favicon.ico') %>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<!-- Header -->
+<%= render "layouts/header" %>
+<!-- Main Content -->
+<div class="container mx-auto mt-8">
+  <%= render "layouts/flash" %>
+  <%= yield %>
+</div>
+<%= render "layouts/footer" %>
+</body>
+</html>
