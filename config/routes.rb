@@ -22,6 +22,10 @@ Rails.application.routes.draw do
   resources :home, only: [:index]
 
   resources :events do
+    member do
+      get 'edit_status'
+      patch 'update_status'
+    end
     resources :ticket_types, only: [:index, :new, :create]
     resources :event_registrations, only: [:index, :new, :create, :show, :edit, :update] do
       resources :tickets, only: [:index, :new, :create, :show, :destroy]

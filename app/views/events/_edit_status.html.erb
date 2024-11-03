@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "event_status_#{@event.id}" do %>
+  <%= form_with(model: @event, url: update_status_event_path(@event), local: false) do |f| %>
+    <div>
+      <%= f.label :status %>
+      <%= f.select :status, Event.statuses.keys.map { |status| [status.humanize, status] } %>
+    </div>
+    <div>
+      <%= f.submit "Update Status" %>
+    </div>
+  <% end %>
+<% end %>

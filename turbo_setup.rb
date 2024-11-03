@@ -1,0 +1,1 @@
+gem 'turbo-rails'

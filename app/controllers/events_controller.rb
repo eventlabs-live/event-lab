@@ -2,8 +2,10 @@ require_relative '../../app/commands/events/create_event_command'
 class EventsController < ApplicationController
   include Pundit
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_event, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :edit_status, :update_status]
+  before_action :authorize_event, only: [ :edit, :update, :destroy,:edit_status, :update_status]
+  before_action :authorize_new_event, only: [:new, :create]
+  before_action :authorize_edit_status, only: [:edit_status, :update_status]
 
   def index
     @events = Event.published.order(start_date: :asc)
@@ -14,11 +16,31 @@ class EventsController < ApplicationController
     @event_registrations = @event.event_registrations.all
   end
 
+  def edit_status
+    render partial: 'edit_status', locals: { event: @event }
+  end
+
+  def update_status
+    if @event.update(event_params)
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("event_status_#{@event.id}", partial: "events/status", locals: { event: @event })
+        end
+        format.html { redirect_to @event, notice: 'Status was successfully updated.' }
+      end
+    else
+      render partial: 'edit_status', locals: { event: @event }, status: :unprocessable_entity
+    end
+  end
+
   def new
     @event = Event.new
   end
 
   def create
+    # following lines were recommended by ai, seems waste full, although no db call.
+    @event = Event.new(event_params)
+    authorize @event
     command = CreateEventCommand.new(params: event_params, organizer: current_user)
     if command.call
 
@@ -56,10 +78,18 @@ class EventsController < ApplicationController
     authorize @event
   end
 
+  def authorize_new_event
+    authorize Event
+  end
+
+  def authorize_edit_status
+    authorize @event, :edit_status?
+  end
+
   def event_params
     params.require(:event).permit(
       :title, :description, :start_date, :end_date, :location,
-      :venue, :cover_image, gallery_images: [], ticket_types: [],
+      :venue, :cover_image, :status, gallery_images: [], ticket_types: [],
       ticket_types_attributes: [:name, :description, :price, :capacity]
     )
   end
