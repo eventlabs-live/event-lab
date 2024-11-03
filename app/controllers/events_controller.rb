@@ -11,7 +11,7 @@ class EventsController < ApplicationController
 
   def show
     @ticket_types = @event.ticket_types.includes(:tickets)
-    @registrations = @event.registrations.all
+    @event_registrations = @event.event_registrations.all
   end
 
   def new
@@ -53,7 +53,7 @@ class EventsController < ApplicationController
   end
 
   def authorize_event
-    authorize Event
+    authorize @event
   end
 
   def event_params

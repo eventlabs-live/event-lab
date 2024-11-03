@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 class RegistrationService
   def self.process(ticket_type:, user:, quantity:, payment_method:)
-    Registration.transaction do
-      registration = Registration.create!(
+    EventRegistration.transaction do
+      registration = EventRegistration.create!(
         user: user,
         ticket_type: ticket_type,
         quantity: quantity
@@ -10,12 +10,12 @@ class RegistrationService
       payment = PaymentService.process(
         amount: ticket_type.current_price * quantity,
         payment_method: payment_method,
-        registration: registration
+        event_registration: registration
       )
       if payment.successful?
         quantity.times do
           Ticket.create!(
-            registration: registration,
+            event_registration: registration,
             ticket_type: ticket_type,
             qr_code: generate_qr_code
           )

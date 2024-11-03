@@ -5,8 +5,8 @@ class Event < ApplicationRecord
   has_many :ticket_types, dependent: :destroy
   accepts_nested_attributes_for :ticket_types
   has_many :tickets, through: :ticket_types
-  has_many :registrations
-  has_many :attendees, through: :registrations
+  has_many :event_registrations
+  has_many :attendees, through: :event_registrations
   has_one_attached :cover_image
   has_many_attached :gallery_images
   validates :title, :start_date, :end_date, :location, presence: true
