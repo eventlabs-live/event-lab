@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :registration do
+  factory :event_registration do
     user { nil }
     event { nil }
     quantity { 1 }

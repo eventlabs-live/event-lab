@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_02_043735) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_03_035536) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,6 +25,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_02_043735) do
     t.index ["checked_by_type", "checked_by_id"], name: "index_check_ins_on_checked_by"
     t.index ["event_id"], name: "index_check_ins_on_event_id"
     t.index ["ticket_id"], name: "index_check_ins_on_ticket_id"
+  end
+
+  create_table "event_registrations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.integer "quantity"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_registrations_on_event_id"
+    t.index ["user_id"], name: "index_event_registrations_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -50,17 +61,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_02_043735) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["registration_id"], name: "index_payments_on_registration_id"
-  end
-
-  create_table "registrations", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "event_id", null: false
-    t.integer "quantity"
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_registrations_on_event_id"
-    t.index ["user_id"], name: "index_registrations_on_user_id"
   end
 
   create_table "ticket_types", force: :cascade do |t|
@@ -101,11 +101,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_02_043735) do
 
   add_foreign_key "check_ins", "events"
   add_foreign_key "check_ins", "tickets"
+  add_foreign_key "event_registrations", "events"
+  add_foreign_key "event_registrations", "users"
   add_foreign_key "events", "users", column: "organizer_id"
-  add_foreign_key "payments", "registrations"
-  add_foreign_key "registrations", "events"
-  add_foreign_key "registrations", "users"
+  add_foreign_key "payments", "event_registrations", column: "registration_id"
   add_foreign_key "ticket_types", "events"
-  add_foreign_key "tickets", "registrations"
+  add_foreign_key "tickets", "event_registrations", column: "registration_id"
   add_foreign_key "tickets", "ticket_types"
 end
