@@ -1,4 +1,4 @@
-require_relative '../../app/commands/events/create_event_command'
+# require_relative '../../app/commands/create_event_command'
 class EventsController < ApplicationController
   include Pundit
   before_action :authenticate_user!, except: [:index, :show]
