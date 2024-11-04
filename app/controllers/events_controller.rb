@@ -1,6 +1,6 @@
 # require_relative '../../app/commands/create_event_command'
 class EventsController < ApplicationController
-  include Pundit
+  include Pundit::Authorization
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy, :edit_status, :update_status]
   before_action :authorize_event, only: [ :edit, :update, :destroy,:edit_status, :update_status]
