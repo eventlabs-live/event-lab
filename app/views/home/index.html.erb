@@ -1,8 +1,92 @@
-<div class="text-center py-20">
-  <h2 class="text-3xl font-bold text-gray-800 mb-4">Welcome to Event Labs</h2>
-  <p class="text-gray-600 mb-8">Your platform for creating and managing events.</p>
-  <div class="space-x-4">
-    <%= link_to 'Browse Events', events_path, class: "bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-700" %>
-    <%= link_to 'Create Event', new_event_path, class: "bg-green-500 text-white px-6 py-2 rounded hover:bg-green-700" %>
-  </div>
+<%# app/views/home/index.html.erb %>
+
+<div class="container">
+
+  <%# Hero Banner %>
+  <%= render partial: 'shared/hero_banner', locals: { hero: @hero } %>
+
+<!--  <section class="bg-gradient-to-r from-purple-600 to-blue-500 text-white py-16">-->
+<!--    <div class="container mx-auto px-4">-->
+<!--      <h2 class="text-4xl font-bold mb-4">Book Now</h2>-->
+<!--      <p class="text-xl mb-8">Enjoy the magic of music with us</p>-->
+<!--    </div>-->
+<!--  </section>-->
+
+  <%# Categories %>
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h3 class="text-2xl font-semibold mb-8">Categories</h3>
+      <div class="grid grid-cols-4 md:grid-cols-8 gap-6">
+        <% categories = ['Music', 'Business', 'Nightlife', 'Holidays', 'Food & Drink', 'Education', 'Gaming', 'Politics'] %>
+        <% categories.each do |category| %>
+          <div class="flex flex-col items-center">
+            <div class="w-16 h-16 bg-white rounded-full shadow-md flex items-center justify-center mb-2">
+              <%# Add category icon here %>
+            </div>
+            <span class="text-sm text-gray-600"><%= category %></span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <%# Event Listings %>
+  <section class="py-12">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between mb-8">
+        <h3 class="text-2xl font-semibold">Browsing events in New York City</h3>
+        <div class="flex space-x-4">
+          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">All</button>
+          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">For You</button>
+          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">Online</button>
+          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">Today</button>
+          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">Free</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <% 8.times do %>
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="aspect-w-16 aspect-h-9 bg-gray-200"></div>
+            <div class="p-4">
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="font-semibold">Event Title</h4>
+                <span class="text-sm text-gray-500">Free/Paid</span>
+              </div>
+              <div class="text-sm text-gray-600 mb-2">
+                <p>Saturday, Oct 22</p>
+                <p>10:41 pm</p>
+                <p>Park Avenue Garden, NYC</p>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
+                  <span class="text-sm text-gray-600">Organizer Name</span>
+                </div>
+                <button class="px-4 py-2 text-sm text-white bg-purple-600 rounded-lg hover:bg-purple-700">Book Now</button>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <%# Interests Section %>
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h3 class="text-2xl font-semibold mb-4">Let's make it personal!</h3>
+      <p class="text-gray-600 mb-8">Select your interests to get event suggestions based on what you love</p>
+      <div class="flex flex-wrap gap-4">
+        <% interests = ['Badminton', 'Cricket', 'Music', 'Cooking', 'Travelling', 'Dancing', 'Art', 'Designing', 'Political Science', 'Party', 'Singing', 'EDM'] %>
+        <% interests.each do |interest| %>
+          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">
+            <%= interest %>
+          </button>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+
 </div>

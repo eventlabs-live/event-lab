@@ -1,78 +1,50 @@
-<header class="bg-blue-600 text-white p-4">
+  <%# Header/Navigation %>
+  <header class="bg-white shadow">
+    <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-4">
 
-    <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-xl font-bold"><%= link_to 'Event Labs', root_path %></h1>
-      <nav class="space-x-4">
+        <!--  <h1 class="text-2xl font-bold"><%#= link_to "Event Labs", root_path %></h1>-->
+        <%= link_to root_path do %>
+          <%= image_tag "event_labs_log.png", class: "h-24 w-auto" %>
+        <% end %>
+        <!--  <h1 class="text-2xl font-bold"><%#= link_to "Event Labs", root_path %></h1>-->
 
-        <ul class="flex space-x-4 right">
-          <li>
-            <%= link_to 'Browse Events', events_path, class: "text-white hover:underline" %>
-          </li>
-          <li>
-            <%= link_to 'Create Event', new_event_path, class: "text-white hover:underline" %>
-          </li>
-          <% if current_user %>
-<!--            <li>-->
-              <%#= link_to current_user.name&.capitalize, current_user %>
-<!--            </li>-->
-            <li>
-              <%#= link_to "Account Settings", edit_user_path(current_user) %>
-              <%= link_to "#{current_user.name&.capitalize}'s Dashboard", dashboard_index_path, class: "text-white hover:underline" %>
-            </li>
-            <li>
-              <%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete}, class: "text-white hover:underline"  %>
-            </li>
-          <% else %>
-            <li>
-              <%= link_to "Sign In", new_user_session_path, class: "text-white hover:underline" %>
-            </li>
-            <li>
-              <%= link_to "Sign Up", new_user_registration_path, class: "text-white hover:underline" %>
-            </li>
+        <div class="relative">
+          <% # TODO: make this a form for search, use turbo frames %>
+          <input type="text" placeholder="Search..." class="w-80 pl-10 pr-4 py-2 rounded-full border border-gray-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-6">
+        <%= link_to 'Browse Events', events_path, class: "text-gray-600 hover:text-gray-900" %>
+        <%= link_to 'Create Event', new_event_path, class: "text-gray-600 hover:text-gray-900" %>
+        <a href="#" class="text-gray-600 hover:text-gray-900">Help Centre</a>
+        <% if current_user %>
+
+          <%= link_to "Dashboard", dashboard_index_path, class: "text-gray-600 hover:text-gray-900" %>
+          <%= link_to edit_user_path(current_user), class: "text-gray-600 hover:text-gray-900" do %>
+            <div class="flex items-center space-x-1">
+            <span><%= current_user.name&.capitalize %></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+
+            </div>
           <% end %>
-        </ul>
 
-      </nav>
-    </div>
+          <%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete} %>
 
+        <% else %>
+          <button class="px-4 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-700">
+            <%= link_to "Sign In", new_user_session_path %></button>
 
-
-<!--  <nav>-->
-    <%#= link_to image_tag("logo.png"), root_path%>
-<!--    <ul class="left">-->
-<!--      <li>-->
-        <%#= nav_link_to "Upcoming", events_path %>
-<!--      </li>-->
-<!--      <li>-->
-        <%#= nav_link_to "Past", filtered_events_path(:past)  %>
-<!--      </li>-->
-<!--      <li>-->
-        <%#= nav_link_to "Free", filtered_events_path(:free) %>
-<!--      </li>-->
-<!--      <li>-->
-        <%#= nav_link_to "Recent", filtered_events_path(:recent) %>
-<!--      </li>-->
-<!--    </ul>-->
-<!--    <ul class="right">-->
-      <%# if current_user %>
-<!--        <li>-->
-          <%#= link_to current_user.name.capitalize, current_user %>
-<!--        </li>-->
-<!--        <li>-->
-          <%#= link_to "Account Settings", edit_user_path(current_user) %>
-<!--        </li>-->
-<!--        <li>-->
-          <%#= link_to "Sign Out", session_path, data: { turbo_method: :delete}, class: "button"  %>
-<!--        </li>-->
-      <%# else %>
-<!--        <li>-->
-          <%#= link_to "Sign In", new_session_path, class: "button" %>
-<!--        </li>-->
-<!--        <li>-->
-          <%#= link_to "Sign Up", signup_path, class: "button" %>
-<!--        </li>-->
-      <%# end %>
-<!--    </ul>-->
-<!--  </nav>-->
-
-</header>
+          <button class="px-4 py-2 text-purple-600 border border-purple-600 rounded-lg hover:bg-purple-50">
+            <%= link_to "Sign Up", new_user_registration_path %></button>
+        <% end %>
+      </div>
+    </nav>
+  </header>
