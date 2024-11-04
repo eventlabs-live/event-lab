@@ -12,8 +12,9 @@ class Event < ApplicationRecord
   validates :title, :start_date, :end_date, :location, presence: true
   validate :end_date_after_start_date
 
-  scope :featured_event, -> { where(featured: true).first }
-  scope :upcoming, -> { where('start_date >= ?', Date.current).order(start_date: :asc) }
+  scope :featured_events, -> { where(featured: true, status: Event.statuses[:published]) }
+
+  scope :upcoming, -> { where('start_date >= ? AND status = ?', Date.current, Event.statuses[:published]).order(start_date: :asc) }
 
   enum status: {
     draft: 1,
