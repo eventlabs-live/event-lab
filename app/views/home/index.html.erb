@@ -3,6 +3,18 @@
 <%# Hero Banner %>
 <%= render partial: 'shared/hero_banner', locals: { hero: @hero } %>
 
+<section>
+<div class="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 gap-3">
+  <% @events.each do |event| %>
+    <div class="bg-white shadow-md rounded p-4">
+      <h3 class="text-xl font-semibold text-gray-800"><%= link_to event.title, event_path(event) %></h3>
+      <p class="text-gray-600">Run by <%= event.organizer.name %> on <%= event.start_date %> </p>
+      <p class="mt-2"><%= link_to 'View Details', event_path(event), class: "text-blue-500 hover:underline" %></p>
+    </div>
+  <% end %>
+</div>
+</section>
+
   <!-- Trending Events Section -->
   <section class="mb-8">
     <div class="flex justify-between items-center mb-4">
@@ -42,10 +54,10 @@
       <a href="#" class="text-sm text-gray-600">See All</a>
     </div>
 
-    <!-- Similar grid structure as Trending Events -->
+<!--     Similar grid structure as Trending Events-->
     <div class="grid grid-cols-2 gap-4">
       <% @popular_events&.each do |event| %>
-        <!-- Similar card structure as above -->
+         Similar card structure as above
       <% end %>
     </div>
   </section>
@@ -55,7 +67,7 @@
     <h2 class="text-lg font-semibold text-indigo-900 mb-4">More Events</h2>
     <div class="grid grid-cols-2 gap-4">
       <% @more_events&.each do |event| %>
-        <!-- Similar card structure as above -->
+<!--         Similar card structure as above-->
       <% end %>
     </div>
   </section>
@@ -82,49 +94,49 @@
   </section>
 
   <%# Event Listings %>
-  <section class="py-12">
-    <div class="container mx-auto px-4">
-      <div class="flex items-center justify-between mb-8">
-        <h3 class="text-2xl font-semibold">Browsing events in New York City</h3>
-        <div class="flex space-x-4">
-          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">All</button>
-          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">For You</button>
-          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">Online</button>
-          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">Today</button>
-          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">Free</button>
-        </div>
-      </div>
+<!--  <section class="py-12">-->
+<!--    <div class="container mx-auto px-4">-->
+<!--      <div class="flex items-center justify-between mb-8">-->
+<!--        <h3 class="text-2xl font-semibold">Browsing events in New York City</h3>-->
+<!--        <div class="flex space-x-4">-->
+<!--          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">All</button>-->
+<!--          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">For You</button>-->
+<!--          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">Online</button>-->
+<!--          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">Today</button>-->
+<!--          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">Free</button>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <% 8.times do %>
-          <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <div class="aspect-w-16 aspect-h-9 bg-gray-200"></div>
-            <div class="p-4">
-              <div class="flex justify-between items-start mb-2">
-                <h4 class="font-semibold">Event Title</h4>
-                <span class="text-sm text-gray-500">Free/Paid</span>
-              </div>
-              <div class="text-sm text-gray-600 mb-2">
-                <p>Saturday, Oct 22</p>
-                <p>10:41 pm</p>
-                <p>Park Avenue Garden, NYC</p>
-              </div>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-2">
-                  <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
-                  <span class="text-sm text-gray-600">Organizer Name</span>
-                </div>
-                <button class="px-4 py-2 text-sm text-white bg-purple-600 rounded-lg hover:bg-purple-700">Book Now</button>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </section>
+<!--      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">-->
+        <%# 8.times do %>
+<!--          <div class="bg-white rounded-lg shadow-md overflow-hidden">-->
+<!--            <div class="aspect-w-16 aspect-h-9 bg-gray-200"></div>-->
+<!--            <div class="p-4">-->
+<!--              <div class="flex justify-between items-start mb-2">-->
+<!--                <h4 class="font-semibold">Event Title</h4>-->
+<!--                <span class="text-sm text-gray-500">Free/Paid</span>-->
+<!--              </div>-->
+<!--              <div class="text-sm text-gray-600 mb-2">-->
+<!--                <p>Saturday, Oct 22</p>-->
+<!--                <p>10:41 pm</p>-->
+<!--                <p>Park Avenue Garden, NYC</p>-->
+<!--              </div>-->
+<!--              <div class="flex items-center justify-between">-->
+<!--                <div class="flex items-center space-x-2">-->
+<!--                  <div class="w-8 h-8 bg-gray-200 rounded-full"></div>-->
+<!--                  <span class="text-sm text-gray-600">Organizer Name</span>-->
+<!--                </div>-->
+<!--                <button class="px-4 py-2 text-sm text-white bg-purple-600 rounded-lg hover:bg-purple-700">Book Now</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+        <%# end %>
+<!--      </div>-->
+<!--    </div>-->
+<!--  </section>-->
 
   <%# Interests Section %>
-  <section class="py-12 bg-gray-50">
+  <section class="py-12 bg-gray-50 shadow border-gray-200">
     <div class="container mx-auto px-4">
       <h3 class="text-2xl font-semibold mb-4">Let's make it personal!</h3>
       <p class="text-gray-600 mb-8">Select your interests to get event suggestions based on what you love</p>

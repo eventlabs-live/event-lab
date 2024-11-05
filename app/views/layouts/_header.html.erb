@@ -12,8 +12,13 @@
 
         <% end %>
       </button>
+      <div class="grid-cols-4 grid gap-2">
+        <div class="col-span-3 mt-2">
       <%= render "shared/mobile_search" %>
-      <h1 class="text-lg font-medium space-x-1">Hey <%= current_user.name&.capitalize %></h1>
+        </div>
+       <h1 class="text-lg font-medium">Hey <%= current_user.name&.capitalize %></h1>
+      </div>
+
       <button class="p-2">
         <%= link_to edit_user_path(current_user), class: "text-gray-600 hover:text-gray-900" do %>
           <div class="h-8 w-8 rounded-full bg-indigo-600 text-white flex items-center justify-center">
