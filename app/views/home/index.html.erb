@@ -1,16 +1,67 @@
 <%# app/views/home/index.html.erb %>
 
-<div class="container">
+<%# Hero Banner %>
+<%= render partial: 'shared/hero_banner', locals: { hero: @hero } %>
 
-  <%# Hero Banner %>
-  <%= render partial: 'shared/hero_banner', locals: { hero: @hero } %>
+  <!-- Trending Events Section -->
+  <section class="mb-8">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg font-semibold text-indigo-900">Trending Events</h2>
+      <a href="#" class="text-sm text-gray-600">See All</a>
+    </div>
 
-<!--  <section class="bg-gradient-to-r from-purple-600 to-blue-500 text-white py-16">-->
-<!--    <div class="container mx-auto px-4">-->
-<!--      <h2 class="text-4xl font-bold mb-4">Book Now</h2>-->
-<!--      <p class="text-xl mb-8">Enjoy the magic of music with us</p>-->
-<!--    </div>-->
-<!--  </section>-->
+    <div class="grid grid-cols-2 gap-4">
+      <% @trending_events&.each do |event| %>
+        <div class="relative rounded-lg overflow-hidden">
+          <%= image_tag "/api/placeholder/150/200", class: "w-full h-32 object-cover rounded-lg" %>
+          <div class="absolute top-2 right-2">
+            <button class="p-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+              </svg>
+            </button>
+          </div>
+          <div class="p-2">
+            <h3 class="font-medium text-sm"><%= event.title %></h3>
+            <p class="text-xs text-gray-600"><%= event.date %></p>
+            <p class="text-xs text-gray-600"><%= event.location %></p>
+            <div class="flex items-center mt-1">
+              <span class="text-xs"><%= event.organizer %></span>
+              <span class="text-xs text-gray-500 ml-2"><%= event.followers %> Followers</span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- Most Popular Section -->
+  <section class="mb-8">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg font-semibold text-indigo-900">Most Popular</h2>
+      <a href="#" class="text-sm text-gray-600">See All</a>
+    </div>
+
+    <!-- Similar grid structure as Trending Events -->
+    <div class="grid grid-cols-2 gap-4">
+      <% @popular_events&.each do |event| %>
+        <!-- Similar card structure as above -->
+      <% end %>
+    </div>
+  </section>
+
+  <!-- More Events Section -->
+  <section>
+    <h2 class="text-lg font-semibold text-indigo-900 mb-4">More Events</h2>
+    <div class="grid grid-cols-2 gap-4">
+      <% @more_events&.each do |event| %>
+        <!-- Similar card structure as above -->
+      <% end %>
+    </div>
+  </section>
+
+<!--<div class="container">-->
+
 
   <%# Categories %>
   <section class="py-12 bg-gray-50">
@@ -87,6 +138,4 @@
       </div>
     </div>
   </section>
-
-
-</div>
+<!--</div>-->

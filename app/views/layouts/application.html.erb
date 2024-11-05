@@ -4,29 +4,76 @@
   <title>Event Labs</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-  <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
   <%= stylesheet_link_tag 'application', media: 'all', "data-turbo-track": 'reload' %>
   <%= javascript_importmap_tags %>
   <%= favicon_link_tag asset_path('favicon.ico') %>
 
-
 </head>
-  <body class="bg-gray-100 font-sans leading-normal tracking-normal">
-<!--  <div class="main-container">-->
-    <div class="min-h-screen bg-white">
 
-    <!-- Header -->
-    <%= render "layouts/header" %>
+<body>
+<!-- MAIN CONTAINER-->
+<div class="w-full flex h-svh max-h-svh">
 
-    <!-- Main Content -->
-    <div class="container mx-auto mt-8">
-      <%= render "layouts/flash" %>
-      <%= yield %>
+  <!-- left side area -->
+  <% if request.fullpath == '/dashboard' && user_signed_in? %>
+  <aside class="hidden md:block h-full flex-[0.3]">
+    <!-- Left Sidebar Content -->
+    <div class="grid h-full place-content-center">
+
+      <%= render "layouts/left_side_bar" %>
     </div>
+  </aside>
+  <% end %>
 
-    <%= render "layouts/footer" %>
+  <!-- MAIN AREA CONTAINER-->
+  <div class="h-full flex-1">
+    <!-- Main Content area, divided vertically into header, content, and footer sections using flexbox-->
+    <div class="flex h-full flex-col justify-between overflow-y-scroll">
+
+      <!-- HEADER  -->
+      <header class="sticky top-0 w-full">
+      <!-- Header -->
+        <div class="py-5">
+          <%= render "layouts/header" %>
+        </div>
+      </header>
+
+      <!-- MAIN CONTENT -->
+      <main class="pl-10">
+        <!-- Content -->
+        <%= render "layouts/flash" %>
+        <%= yield %>
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="hidden lg:block w-full bg-gray-700">
+        <!-- Footer Content -->
+        <div class="py-1">
+          <%= render "layouts/footer" %>
+        </div>
+      </footer>
+
+      <!-- BOTTOM NAVIGATION -->
+      <nav class="sticky top-0 block py-5 md:hidden">
+        <%= render "layouts/botton_navigation" %>
+      </nav>
+
+    </div>
   </div>
+
+  <!-- Right Sidebar area-->
+  <% if false %>
+  <aside class="hidden lg:block h-full flex-[0.3]">
+    <!-- Right Sidebar content -->
+    <div class="grid h-full place-content-center">
+      <%= render "layouts/right_side_bar" %>
+    </div>
+  </aside>
+    <% end %>
+
+</div>
+
 </body>
 </html>
