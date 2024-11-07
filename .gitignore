@@ -41,3 +41,6 @@
 # Ignore RubyMine project files and folders.
 .idea/
 *.iml
+
+# Ignore litstack sql lite db
+/db/development/
