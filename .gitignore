@@ -44,3 +44,6 @@
 
 # Ignore litstack sql lite db
 /db/development/
+
+
+**/.DS_Store
