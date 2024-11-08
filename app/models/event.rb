@@ -16,6 +16,8 @@ class Event < ApplicationRecord
 
   scope :upcoming, -> { where('start_date >= ? AND status = ?', Date.current, Event.statuses[:published]).order(start_date: :asc) }
 
+  scope :trending, -> { self.upcoming.order(clicks: :desc).limit(10) }
+
   enum status: {
     draft: 1,
     published: 2,

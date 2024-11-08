@@ -14,6 +14,7 @@ class EventsController < ApplicationController
   def show
     @ticket_types = @event.ticket_types.includes(:tickets)
     @event_registrations = @event.event_registrations.all
+    @event.increment!(:clicks)
   end
 
   def edit_status

@@ -26,8 +26,25 @@
 
     <div class="grid grid-cols-2 gap-4">
       <% @trending_events&.each do |event| %>
+
+        <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+          <div class="md:flex">
+            <div class="md:shrink-0">
+              <%= image_tag 'ticket_stub.jpg', class: "h-48 w-full object-cover md:h-full md:w-48" %>
+            </div>
+            <div class="p-8">
+              <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold"><%= event.title %></div>
+              <a href="#" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">Incredible accommodation for your team</a>
+              <p class="mt-2 text-slate-500">Looking to take your team away on a retreat to enjoy awesome food and take in some sunshine? We have a list of places to do just that.</p>
+            </div>
+          </div>
+        </div>
+
+
+
+
         <div class="relative rounded-lg overflow-hidden">
-          <%= image_tag "/api/placeholder/150/200", class: "w-full h-32 object-cover rounded-lg" %>
+          <%= image_tag 'ticket_stub.jpg', class: "w-full h-32 object- rounded-lg" %>
           <div class="absolute top-2 right-2">
             <button class="p-1">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -40,8 +57,8 @@
             <p class="text-xs text-gray-600"><%= event.date %></p>
             <p class="text-xs text-gray-600"><%= event.location %></p>
             <div class="flex items-center mt-1">
-              <span class="text-xs"><%= event.organizer %></span>
-              <span class="text-xs text-gray-500 ml-2"><%= event.followers %> Followers</span>
+              <span class="text-xs"><%= event.organizer&.name %></span>
+              <span class="text-xs text-gray-500 ml-2"><%#= event.followers %> Followers</span>
             </div>
           </div>
         </div>
