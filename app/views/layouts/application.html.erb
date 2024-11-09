@@ -17,7 +17,7 @@
 <div class="w-full flex h-svh max-h-svh">
 
   <!-- left side area -->
-  <% if request.fullpath == '/dashboard' && user_signed_in? %>
+  <% if false #request.fullpath == '/dashboard' && user_signed_in? %>
   <aside class="hidden md:block h-full flex-[0.3]">
     <!-- Left Sidebar Content -->
     <div class="grid h-full place-content-center">
@@ -42,8 +42,9 @@
 
       <!-- MAIN CONTENT -->
       <main class="z-0">
-        <!-- Content -->
+        <!-- Flash -->
         <%= render "layouts/flash" %>
+        <!-- Content -->
         <div>
         <%= yield %>
         </div>

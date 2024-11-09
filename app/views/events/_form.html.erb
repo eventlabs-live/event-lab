@@ -1,0 +1,41 @@
+
+<%= form_with model: @event, local: true, class: "space-y-4" do |form| %>
+  <%= render "shared/errors", object: @event %>
+  <div>
+    <%= form.label :title, "Event Title", class: "block font-semibold" %>
+    <%= form.text_field :title, class: "w-full border rounded p-2" %>
+  </div>
+
+  <div>
+    <%= form.label :description, "Description", class: "block font-semibold" %>
+    <%= form.text_field :description, class: "w-full border rounded p-2" %>
+  </div>
+
+  <div>
+    <%= form.label :start_date, "Event Start Date", class: "block font-semibold" %>
+    <%= form.date_field :start_date, class: "w-full border rounded p-2" %>
+  </div>
+
+  <div>
+    <%= form.label :end_date, "Event Start Date", class: "block font-semibold" %>
+    <%= form.date_field :end_date, class: "w-full border rounded p-2" %>
+  </div>
+
+  <div>
+    <%= form.label :location, "Event Location", class: "block font-semibold" %>
+    <%= form.text_field :location, class: "w-full border rounded p-2" %>
+  </div>
+
+  <div class="flex space-x-4">
+    <% if defined? button_text %>
+      <%= form.submit "#{button_text}", class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"%>
+    <% else  %>
+      <%= form.submit class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700" %>
+    <% end %>
+
+    <%= link_to "Cancel", session[:previous_url] || root_path, class: "bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-700" %>
+  </div>
+
+<% end %>
+
+

@@ -1,0 +1,20 @@
+<section class="flex justify-center">
+
+  <div data-controller="carousel"
+       class="relative overflow-hidden w-full sm:w-96 h-64 sm:h-80 md:h-96 lg:h-128 mx-auto">
+    <div class="carousel-inner flex">
+      <div data-carousel-target="slide"
+           class="carousel-item flex-shrink-0 w-full h-full flex items-center justify-center">
+        <%= image_tag 'event_labs_log.png', class: "w-full h-full object-cover" %>
+      </div>
+      <div data-carousel-target="slide" class="carousel-item flex-shrink-0 w-full h-full flex items-center justify-center">
+        <%= image_tag 'ticket_stub_blank.png', class: "w-full h-full object-cover" %>
+      </div>
+      <div data-carousel-target="slide" class="carousel-item flex-shrink-0 w-full h-full flex items-center justify-center">
+        <%= image_tag 'ticket_stub_series.png', class: "w-full h-full object-cover" %>
+      </div>
+    </div>
+    <button data-action="carousel#prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-600 text-white p-2 rounded-full opacity-75 hover:opacity-100">Prev</button>
+    <button data-action="carousel#next" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-600 text-white p-2 rounded-full opacity-75 hover:opacity-100">Next</button>
+  </div>
+</section>

@@ -1,19 +1,20 @@
 class EventRegistrationsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
+  before_action :set_event, only: [:new, :create]
+  before_action :set_request_referer , only: [:new, :create]
+
   def new
-    @event = Event.find(params[:event_id])
     @event_registration = @event.event_registrations.build
   end
 
   def create
-    @event_registration = EventRegistration.new(registration_params.except(:status))
-    @event_registration.status = EventRegistration.statuses.key(registration_params[:status].to_i) if registration_params[:status]
-    @event_registration.event_id = params[:event_id]
+    @event_registration = @event.event_registrations.build(registration_params)
     @event_registration.user = current_user
 
     if @event_registration.save
       redirect_to event_event_registrations_path(@event_registration), notice: 'Event Registration was successfully created.'
     else
-      render :new
+      render :new, alert: 'Invalid Data!', status: :unprocessable_entity
     end
   end
 
@@ -27,13 +28,33 @@ class EventRegistrationsController < ApplicationController
 
   private
 
+  def set_event
+    @event = Event.find(event_params[:event_id])
+  end
+
+  # def registration_params
+  #   params.require(:event_registration).permit(:name, :quantity, :status).merge(event_id: params[:event_id])
+  # end
+
   def registration_params
-    params.require(:event_registration).permit(:name, :quantity, :status).merge(event_id: params[:event_id])
+    params.require(:event_registration).permit(:name, :quantity, :status).tap do |whitelisted|
+      whitelisted[:status] = whitelisted[:status].to_i if whitelisted[:status]
+      whitelisted[:quantity] = whitelisted[:quantity].to_i if whitelisted[:quantity]
+    end.merge(event_id: params[:event_id])
   end
 
   def event_params
     params.permit(:event_id)
   end
 
+  def authenticate_user!
+    unless user_signed_in?
+      store_location_for(:user, request.fullpath)
+      redirect_to new_user_session_path, alert: 'You need to sign in or sign up before continuing.'
+    end
+  end
 
+  def set_request_referer
+    session[:previous_url] = request.referer
+  end
 end
