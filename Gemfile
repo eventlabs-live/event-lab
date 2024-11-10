@@ -77,10 +77,11 @@ gem 'devise'  # Authentication
 gem 'pundit'  # Authorization
 gem 'stripe'  # Payment processing
 gem 'rqrcode'  # QR code generation
+gem 'prawn'  # PDF generation
 gem 'sidekiq'  # Background job processing
 gem 'active_model_serializers'  # JSON serialization
 gem 'aws-sdk-s3'  # File storage
 gem 'image_processing'  # Image handling
 gem 'money-rails'  # Money handling
 gem 'aasm'  # State machine
-gem 'after_commit_everywhere', '~> 1.0'
+gem 'after_commit_everywhere', '~> 1.0'  # Callbacks

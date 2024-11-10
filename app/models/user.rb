@@ -8,4 +8,5 @@ class User < ApplicationRecord
             uniqueness: true,
             format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i,
                       message: "must be a valid email address" }
+  has_many :event_registrations
 end

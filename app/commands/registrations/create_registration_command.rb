@@ -76,6 +76,7 @@ module Registrations
 
     def process_successful_registration(registration)
       create_payment(registration)
+      generate_ticket_pdf(registration)
       schedule_confirmation_email(registration)
       notify_organizer(registration)
     end
@@ -96,5 +97,10 @@ module Registrations
     def notify_organizer(registration)
       # NewRegistrationNotification.deliver_to_organizer(registration)
     end
+
+    def generate_ticket_pdf(registration)
+      TicketPdfGenerator.new(registration).generate
+    end
+
   end
 end
