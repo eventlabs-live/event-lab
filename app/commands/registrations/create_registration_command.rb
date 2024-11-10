@@ -23,7 +23,7 @@ module Registrations
       registration = build_registration
 
       if registration.save
-        process_successful_registration(registration)
+        process_successful_registration(registration, @params[:ticket_type_id])
         success(registration, status: :created)
       else
         failure(:registration_failed, registration.errors)
@@ -32,9 +32,9 @@ module Registrations
 
     def build_registration
 
-      event.event_registrations.build(@params).tap do |registration|
+      event.event_registrations.build(@params.except(:ticket_type_id)).tap do |registration|
         registration.user = @user
-        #   registration.ticket_type: ticket_type,
+        # registration.ticket_type = ticket_type
         #   quantity: @params[:quantity],
         #   registration.attendee_details: params[:attendee_details]
       end
@@ -46,6 +46,7 @@ module Registrations
 
     def ticket_type
       @ticket_type ||= event.ticket_types.find(@params[:ticket_type_id])
+      TicketType.default(event) if @ticket_type.nil?
     end
 
     def event_exists
@@ -74,9 +75,9 @@ module Registrations
       errors.add(:base, "already registered for this event")
     end
 
-    def process_successful_registration(registration)
+    def process_successful_registration(registration, ticket_type_id)
       create_payment(registration)
-      generate_ticket_pdf(registration)
+      generate_ticket_pdf(registration, ticket_type_id)
       schedule_confirmation_email(registration)
       notify_organizer(registration)
     end
@@ -98,8 +99,8 @@ module Registrations
       # NewRegistrationNotification.deliver_to_organizer(registration)
     end
 
-    def generate_ticket_pdf(registration)
-      TicketPdfGenerator.new(registration).generate
+    def generate_ticket_pdf(registration, ticket_type_id)
+      TicketPdfGenerator.new(registration, ticket_type_id).generate
     end
 
   end

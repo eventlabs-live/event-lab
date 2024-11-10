@@ -2,9 +2,10 @@ class Event < ApplicationRecord
   include AASM
   after_initialize :set_defaults
   belongs_to :organizer, class_name: 'User'
-  has_many :ticket_types, dependent: :destroy
+  has_many :ticket_types, dependent: :destroy, autosave: true
   accepts_nested_attributes_for :ticket_types
-  has_many :tickets, through: :ticket_types
+  # has_many :tickets, through: :ticket_types
+  has_many :tickets, through: :event_registrations
   has_many :event_registrations
   has_many :attendees, through: :event_registrations
   has_one_attached :cover_image
@@ -52,6 +53,7 @@ class Event < ApplicationRecord
   private
 
   def end_date_after_start_date
+    return if end_date.blank? || start_date.blank?
     errors.add(:end_date, "must be after the start date") if end_date < start_date
   end
 

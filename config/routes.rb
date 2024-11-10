@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   end
 
   # Check-in routes
-  resources :check_ins, only: [:create]
+  resources :check_ins, only: [:index, :create]
+  resources :tickets, only: [:show]
 
   # Other EventRegistrations
   resources :tickets, only: [:index, :show, :new, :create] do

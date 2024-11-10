@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_10_044230) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_10_105641) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,7 +62,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_10_044230) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "ticket_id"
     t.index ["event_id"], name: "index_event_registrations_on_event_id"
+    t.index ["ticket_id"], name: "index_event_registrations_on_ticket_id"
     t.index ["user_id"], name: "index_event_registrations_on_user_id"
   end
 
@@ -107,11 +109,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_10_044230) do
 
   create_table "tickets", force: :cascade do |t|
     t.bigint "ticket_type_id", null: false
-    t.bigint "registration_id", null: false
+    t.bigint "event_registration_id", null: false
     t.string "qr_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["registration_id"], name: "index_tickets_on_registration_id"
+    t.index ["event_registration_id"], name: "index_tickets_on_event_registration_id"
     t.index ["ticket_type_id"], name: "index_tickets_on_ticket_type_id"
   end
 
@@ -135,10 +137,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_10_044230) do
   add_foreign_key "check_ins", "events"
   add_foreign_key "check_ins", "tickets"
   add_foreign_key "event_registrations", "events"
+  add_foreign_key "event_registrations", "tickets"
   add_foreign_key "event_registrations", "users"
   add_foreign_key "events", "users", column: "organizer_id"
   add_foreign_key "payments", "event_registrations", column: "registration_id"
   add_foreign_key "ticket_types", "events"
-  add_foreign_key "tickets", "event_registrations", column: "registration_id"
+  add_foreign_key "tickets", "event_registrations"
   add_foreign_key "tickets", "ticket_types"
 end

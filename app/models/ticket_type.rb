@@ -16,6 +16,6 @@ class TicketType < ApplicationRecord
   end
 
   def self.default(event)
-    where(name: 'Free').first_or_create(event_id: event, name: 'Free', price: 0, capacity: 10)
+    where(name: 'DEFAULT').first_or_create(event_id: event, name: 'DEFAULT', price: 0, capacity: 100)
   end
 end

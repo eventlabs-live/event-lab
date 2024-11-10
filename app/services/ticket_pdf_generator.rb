@@ -3,10 +3,11 @@ require 'prawn'
 require 'rqrcode'
 
 class TicketPdfGenerator
-  def initialize(registration)
+  def initialize(registration, ticket_type_id)
     @registration = registration
     @event = registration.event
     @user = registration.user
+    @ticket_type = TicketType.find(ticket_type_id)
   end
 
   def generate
@@ -36,7 +37,17 @@ class TicketPdfGenerator
   private
 
   def generate_qr_code
-    qr_code_content = "Event: #{@event.title}, Date: #{@event.start_date}, Attendee: #{@user.name}, Quantity: #{@registration.quantity}"
+    require 'securerandom'
+    @qr_code_uuid = SecureRandom.uuid
+    # qr_code_content = "Event: #{@event.title}, Date: #{@event.start_date}, Attendee: #{@user.name}, Quantity: #{@registration.quantity}"
+    qr_code_content = {
+      barcode_uuid: @qr_code_uuid,
+      event: @event.title,
+      event_date: @event.start_date,
+      attendee: @user.name,
+      purchase_date: @registration.created_at,
+      quantity: @registration.quantity
+    }.to_json
     qrcode = RQRCode::QRCode.new(qr_code_content)
     qrcode.as_png(size: 200)
   end
@@ -47,6 +58,13 @@ class TicketPdfGenerator
       filename: "ticket_#{@registration.id}.pdf",
       content_type: 'application/pdf'
     )
+    # @registration.ticket.build()
+    tikcet = @registration.build_ticket(
+      ticket_type: @ticket_type,
+      qr_code: @qr_code_uuid
+    )
+    tikcet.save!
+
   end
 
 end

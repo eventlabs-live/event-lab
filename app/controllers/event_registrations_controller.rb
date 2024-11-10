@@ -38,7 +38,7 @@ class EventRegistrationsController < ApplicationController
   end
 
   def registration_params
-    params.require(:event_registration).permit(:name, :quantity, :status).tap do |whitelisted|
+    params.require(:event_registration).permit(:name, :quantity, :status, :ticket_type_id).tap do |whitelisted|
       whitelisted[:status] = whitelisted[:status].to_i if whitelisted[:status]
       whitelisted[:quantity] = whitelisted[:quantity].to_i if whitelisted[:quantity]
     end.merge(event_id: params[:event_id])

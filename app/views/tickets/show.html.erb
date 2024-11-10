@@ -1,4 +1,5 @@
 <div>
   <h1 class="font-bold text-4xl">Tickets#show</h1>
   <p>Find me in app/views/tickets/show.html.erb</p>
+  <%= image_tag @qr.as_png(size: 200).to_data_url %>
 </div>

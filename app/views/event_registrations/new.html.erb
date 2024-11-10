@@ -3,8 +3,8 @@
 <div class="container mx-auto px-4 py-8">
   <%= form_with(model: @event_registration, method: :post, url: event_event_registrations_path,
                 class: "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4") do |f| %>
-    <%= f.hidden_field :authenticity_token, value: form_authenticity_token %>
-    <%= f.hidden_field :event_id, value: @event_registration.event.id %>
+    <%#= f.hidden_field :authenticity_token, value: form_authenticity_token %>
+    <%#= f.hidden_field :event_id, value: @event_registration.event.id %>
     <h2 class="text-3xl font-bold mb-8"><%= @event_registration.event.title %></h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
@@ -14,33 +14,41 @@
         <p class="mb-2">Time: TBC</p>
         <p>Location: <%= @event_registration.event.location %></p>
       </div>
-      <div>
-        <%= image_tag "location-map-place-holder.png", class: "w-full h-full object-cover" %>
+      <div class="lg:size-32">
+        <%= image_tag "location-map-place-holder.png", class: "lg:size-32 object-scale-down"%>
       </div>
     </div>
 
     <div class="mt-8">
       <h3 class="text-xl font-bold mb-4">Ticket Options</h3>
-      <% #ToDo loop through ticket types %>
-      <div class="border border-gray-200 rounded-md p-4 mb-4">
-        <p class="mb-2">Ticket Type Description Stimulus</p>
 
-        <div class="flex items-center" data-controller="quantity">
-          <%= button_tag "-", type: "button", data: { action: "click->quantity#decrement" },
-                         class: "bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-l" %>
+      <% @event_registration.event&.ticket_types&.each do |ticket_type| %>
+        <div class="border border-gray-200 rounded-md p-4 mb-4">
+          <div class="flex grid grid-cols-4 gap-4 ">
+            <div class="mb-2 shrink">
+              <span class="mb-2"><%= "#{ticket_type.name}, #{ticket_type.description}: #{number_to_currency(ticket_type.price)}" %></span>
+            </div>
+            <div class="col-span-1">
+              <div class="flex items-center" data-controller="quantity">
+                <%= button_tag "-", type: "button", data: { action: "click->quantity#decrement" },
+                               class: "bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-l" %>
 
-          <%= f.number_field :quantity, value: 0, data: { target: "quantity.quantity" },
-                               class: "w-16 text-center border border-gray-300 rounded-none" %>
-          <%= button_tag "+", type: "button", data: { action: "click->quantity#increment" },
-                         class: "bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-r" %>
-<!--          <span class="ml-4"> $Cost + $Convenience fee + Taxes</span>-->
+                <%= f.number_field :quantity, value: 0, data: { target: "quantity.quantity" },
+                                   class: "w-16 text-center border border-gray-300 rounded-none" %>
+                <%= button_tag "+", type: "button", data: { action: "click->quantity#increment" },
+                               class: "bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-r" %>
+                <%= f.hidden_field :ticket_type_id, value: ticket_type.id %>
+                <!--          <span class="ml-4"> $Cost + $Convenience fee + Taxes</span>-->
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
 
     <div class="mb-6">
       <%= f.label :status, "Status", class: "block text-gray-700 text-sm font-bold mb-2" %>
-      <%= f.select :status, EventRegistration.statuses, {},
+      <%= f.select :status, EventRegistration.statuses.except(:attended, :cancelled) {},
                    class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
     </div>
     <div class="flex items-center justify-between"></div>
