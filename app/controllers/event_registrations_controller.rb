@@ -8,12 +8,17 @@ class EventRegistrationsController < ApplicationController
   end
 
   def create
-    @event_registration = @event.event_registrations.build(registration_params)
-    @event_registration.user = current_user
 
-    if @event_registration.save
-      redirect_to event_event_registrations_path(@event_registration), notice: 'Event Registration was successfully created.'
+    command = Registrations::CreateRegistrationCommand.call(
+      params: registration_params,
+      user: current_user
+    )
+
+    if command.success?
+      redirect_to event_event_registrations_path(@event), notice: 'Event Registration was successfully created.'
     else
+      flash.now[:alert] = "Invalid Data!"
+      @event_registration = @event.event_registrations.build
       render :new, alert: 'Invalid Data!', status: :unprocessable_entity
     end
   end
@@ -31,10 +36,6 @@ class EventRegistrationsController < ApplicationController
   def set_event
     @event = Event.find(event_params[:event_id])
   end
-
-  # def registration_params
-  #   params.require(:event_registration).permit(:name, :quantity, :status).merge(event_id: params[:event_id])
-  # end
 
   def registration_params
     params.require(:event_registration).permit(:name, :quantity, :status).tap do |whitelisted|

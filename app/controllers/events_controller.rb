@@ -1,9 +1,10 @@
-# require_relative '../../app/commands/create_event_command'
+
 class EventsController < ApplicationController
   include Pundit::Authorization
   before_action :authenticate_user!, except: [:index, :show]
+  #TODO: check if all actons are needed given use of commands.
   before_action :set_event, only: [:show, :edit, :update, :destroy, :edit_status, :update_status]
-  before_action :authorize_event, only: [ :edit, :update, :destroy,:edit_status, :update_status]
+  before_action :authorize_event, only: [ :edit, :update, :destroy, :edit_status, :update_status]
   before_action :authorize_new_event, only: [:new, :create]
   before_action :authorize_edit_status, only: [:edit_status, :update_status]
 
@@ -39,12 +40,10 @@ class EventsController < ApplicationController
   end
 
   def create
-    # following lines were recommended by ai, seems waste full, although no db call.
-    @event = Event.new(event_params)
-    authorize @event
-    command = CreateEventCommand.new(params: event_params, organizer: current_user)
+    # @event = Event.new(event_params)
+    # authorize @event
+    command = Events::CreateEventCommand.new(params: event_params, organizer: current_user)
     if command.call
-
       redirect_to dashboard_index_path, notice: 'Event created successfully.'
     else
       flash.now[:alert] = "Invalid Data!"
@@ -52,14 +51,13 @@ class EventsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
-    if @event.update(event_params)
+    command = Events::UpdateEventCommand.call(params: event_params, organizer: current_user)
+    if command.success?
       redirect_to @event, notice: 'Event was successfully updated.'
     else
-      render :edit
+      flash.now[:alert] = "Invalid Data!"
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -92,6 +90,6 @@ class EventsController < ApplicationController
       :title, :description, :start_date, :end_date, :location,
       :venue, :cover_image, :status, gallery_images: [], ticket_types: [],
       ticket_types_attributes: [:name, :description, :price, :capacity]
-    )
+    ).merge(id: params[:id])
   end
 end
