@@ -5,16 +5,18 @@ import QrScanner from "qr-scanner"
 // app/javascript/controllers/qr_scanner_controller.js
 
 export default class extends Controller {
-  static targets = ["video", "result", "startScanner"]
+  static targets = ["video", "result", "startScanner", "stopScanner", "details"]
 
   connect() {
     console .log("QR Scanner connected");
     this.startScannerTarget.addEventListener('click', () => this.initializeScanner());
+    this.stopScannerTarget.addEventListener('click', () => this.stopScanner());
     console .log("QR Scanner initialized");
   }
 
   async initializeScanner() {
     try {
+      this.detailsTarget.classList.add("hidden");
       this.videoTarget.classList.remove('hidden');
       this.scanner = new QrScanner(
           this.videoTarget,
@@ -64,9 +66,19 @@ export default class extends Controller {
           this.disconnect();
         })
   }
+
+  stopScanner() {
+    if (this.scanner) {
+      this.scanner.stop();
+      this.videoTarget.classList.add('hidden');
+      this.detailsTarget.classList.remove('hidden');
+    }
+  }
+
   disconnect() {
     if (this.scanner) {
       this.scanner.destroy()
     }
+    this.detailsTarget.classList.remove("hidden");
   }
 }

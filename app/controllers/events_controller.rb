@@ -8,6 +8,8 @@ class EventsController < ApplicationController
   before_action :authorize_new_event, only: [:new, :create]
   before_action :authorize_edit_status, only: [:edit_status, :update_status]
 
+  helper_method :event_owner?
+
   def index
     @events = Event.published.order(start_date: :asc)
   end
@@ -91,5 +93,9 @@ class EventsController < ApplicationController
       :venue, :cover_image, :status, gallery_images: [], ticket_types: [],
       ticket_types_attributes: [:name, :description, :price, :capacity]
     ).merge(id: params[:id])
+  end
+
+  def event_owner?
+    current_user == @event.organizer
   end
 end

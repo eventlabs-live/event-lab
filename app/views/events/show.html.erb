@@ -5,8 +5,11 @@
     <p class="text-gray-600 mb-6"><%= @event.start_date %> at <%= @event.location %></p>
   <%= turbo_frame_tag "event_status_#{@event.id}" do %>
     <p>Status: <%= @event.status %></p>
-    <%= link_to 'Edit Status', edit_status_event_path(@event), data: { turbo_frame: "event_status_#{@event.id}" } %>
+    <% if event_owner? %>
+      <%= link_to 'Edit Status', edit_status_event_path(@event), data: { turbo_frame: "event_status_#{@event.id}" }  %>
+    <% end %>
   <% end %>
+  <%= link_to 'Check In', new_event_check_in_path(@event) if event_owner?%>
     </div>
     <div class="bg-white shadow rounded p-6 mb-6">
       <h3 class="text-xl font-bold text-gray-800 mb-2">Event Description</h3>
