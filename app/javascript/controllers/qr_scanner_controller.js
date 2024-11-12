@@ -27,7 +27,7 @@ export default class extends Controller {
           {
             maxScansPerSecond:1,
             highlightScanRegion:  true ,
-            highlightCodeOutline: true,
+            // highlightCodeOutline: true,
             overlay: overLayDiv,
             returnDetailedScanResult: true
           }
@@ -81,8 +81,8 @@ export default class extends Controller {
       this.overlayTarget.classList.add('hidden');
       this.videoTarget.classList.add('hidden');
       this.detailsTarget.classList.remove('hidden');
-      this.startScannerTarget.classList.remove('hidden');
       this.stopScannerTarget.classList.add('hidden');
+      this.startScannerTarget.classList.remove('hidden');
     }
   }
 
