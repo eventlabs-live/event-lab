@@ -2,8 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 import QrScanner from "qr-scanner"
 
 export default class extends Controller {
-  static targets = ["video", "result", "startScanner", "stopScanner", "details", "overlay"]
-
+  static targets = ["video", "result", "startScanner", "stopScanner", "details", "overlay"];
   connect() {
     console .log("QR Scanner connected");
     this.startScannerTarget.addEventListener('click', () => this.initializeScanner());
@@ -13,19 +12,23 @@ export default class extends Controller {
 
   async initializeScanner() {
     try {
+      const videoPlayer = this.videoTarget;
+      const overLayDiv = this.overlayTarget;
+      console.log("Overlay div: ", overLayDiv);
       this.detailsTarget.classList.add("hidden");
       this.videoTarget.classList.remove('hidden');
       this.overlayTarget.classList.remove('hidden');
       this.startScannerTarget.classList.add('hidden');
       this.stopScannerTarget.classList.remove('hidden');
+
       this.scanner = new QrScanner(
-          this.videoTarget,
+          videoPlayer,
           result => this.handleScan(result),
           {
             maxScansPerSecond:1,
             highlightScanRegion:  true ,
             highlightCodeOutline: true,
-            overlay: this.overlayTarget,
+            overlay: overLayDiv,
             returnDetailedScanResult: true
           }
       )
@@ -87,9 +90,5 @@ export default class extends Controller {
       this.scanner = null;
     }
     this.detailsTarget.classList.remove("hidden");
-    // this.resizeHandler = () => this.updateScanner();
-    // window.addEventListener('resize', this.resizeHandler);
-    // window.removeEventListener('resize', this.resizeHandler);
-
   }
 }
