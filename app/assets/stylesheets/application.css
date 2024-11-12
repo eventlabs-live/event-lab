@@ -17,7 +17,7 @@ header, section, footer, aside, nav, main, article, figure, div[class] {
     border: 1px solid red;
 }
 html, body {
-    overflow-x: hidden;
     position: fixed;
-    width: 100%;
+    width: auto!important;
+    overflow-x: hidden!important
 }
