@@ -36,11 +36,12 @@
         <%= link_to event_path(event) do %>
           <%=  image_tag 'ticket_stub_blank.png', class: "w-full h-full" %>
 
-          <div class="absolute bottom-1 md:bottom-ß lg:bottom-10 left-8 md:left-10 lg:left-14">
-            <p class="font-bold sm:font-normal text-xs md:text-lg lg:text-lg transform -rotate-90 origin-left whitespace-nowrap"><%= event.start_date %></p>
+<!--          <div class="absolute bottom-1 md:bottom-ß lg:bottom-10 left-8 md:left-10 lg:left-14">-->
+          <div class="absolute bottom-1  md:bottom-ß lg:bottom-10 left-[17.5%]">
+            <p class="text-center font-bold sm:font-normal text-xs md:text-lg lg:text-lg transform -rotate-90 origin-left whitespace-nowrap"><%= event.start_date %></p>
           </div>
-
-          <div class="absolute top-1 lg:top-4 left-14 md:left-16 lg:left-24 text-brown w-full h-full overflow-hidden">
+          <div class="absolute top-1 lg:top-4 left-[25%] text-brown h-[95%] w-[70%] overflow-hidden">
+<!--          <div class="absolute top-1 lg:top-4 left-14 md:left-16 lg:left-24 text-brown h-full overflow-hidden">-->
             <p class="text-black font-bold"><%= event.title %></p>
             <p class="text-red-800">At <%= event.location %></p>
             <p class="text-gray-600 text-xs capitalize">By <%= event.organizer.name %> </p>
