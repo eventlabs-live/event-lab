@@ -33,12 +33,13 @@
     </div>
 
     <div class="flex justify-center items-center space-x-4">
-      <%= link_to image_tag("google.svg", alt: "Sign in with Google", class: "w-10 h-10 shadow-lg shadow-red-500/50 rounded-full"), '#', class: "flex items-center justify-center" %>
-      <%= link_to image_tag("apple.svg", alt: "Sign in with Apple", class: "w-10 h-10 shadow-lg shadow-gray-500/50 rounded-full "), '#', class: "flex items-center justify-center" %>
+      <%= link_to image_tag("google.svg", alt: "Sign in with Google", class: "w-10 h-10 shadow-lg shadow-red-50/10 rounded-full"), '#', class: "flex items-center justify-center" %>
+      <%= link_to image_tag("apple.svg", alt: "Sign in with Apple", class: "w-10 h-10 shadow-lg shadow-gray-100/10 rounded-full "), '#', class: "flex items-center justify-center" %>
     </div>
 
     <div class="text-center">
-      <p class="text-sm font-medium text-gray-500">Don't have an account? <%= link_to "Sign up", new_user_registration_path, class: "text-indigo-600 hover:text-indigo-500" %></p>
+      <p class="text-sm font-medium text-gray-500">Don't have an account?</p>
+      <p><%= link_to "Sign up", new_user_registration_path, class: "text-indigo-600 hover:text-indigo-500" %></p>
     </div>
 
   <% end %>

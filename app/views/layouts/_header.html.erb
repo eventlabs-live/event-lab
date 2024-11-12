@@ -30,15 +30,14 @@
       </button>
 
     <% else %>
-      <button class="p-2">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
-      </button>
+<!--      <button class="p-2">-->
+<!--        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">-->
+<!--          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />-->
+<!--        </svg>-->
+<!--      </button>-->
 
       <%= render "shared/mobile_search" %>
 
-      <h1 class="text-lg font-medium space-x-1">Hey There</h1>
       <button class="p-2">
         <%= link_to new_user_session_path, class: "text-gray-600 hover:text-gray-900" do %>
           <div class="h-8 w-8 rounded-full bg-indigo-600 text-white flex items-center justify-center">

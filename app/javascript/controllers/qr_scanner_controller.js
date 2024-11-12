@@ -11,6 +11,7 @@ export default class extends Controller {
     console .log("QR Scanner connected");
     this.startScannerTarget.addEventListener('click', () => this.initializeScanner());
     this.stopScannerTarget.addEventListener('click', () => this.stopScanner());
+    window.addEventListener('resize', () => this.updateScanner());
     console .log("QR Scanner initialized");
   }
 
@@ -67,6 +68,13 @@ export default class extends Controller {
         })
   }
 
+  updateScanner() {
+    if (this.scanner) {
+      this.scanner.stop();
+      this.scanner.start();
+    }
+  }
+
   stopScanner() {
     if (this.scanner) {
       this.scanner.stop();
@@ -80,5 +88,7 @@ export default class extends Controller {
       this.scanner.destroy()
     }
     this.detailsTarget.classList.remove("hidden");
+    window.removeEventListener('resize', () => this.updateScanner());
+
   }
 }

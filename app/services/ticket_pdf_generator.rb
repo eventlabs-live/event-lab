@@ -11,24 +11,24 @@ class TicketPdfGenerator
   end
 
   def generate
-    pdf_content = Prawn::Document.new do |pdf|
-      pdf.text "Event Ticket", size: 30, style: :bold, align: :center
-      pdf.move_down 20
+    pdf_content = Prawn::Document.new(page_size: [375, 600]) do |pdf|
+      pdf.text "Event Ticket", size: 20, style: :bold, align: :center
+      pdf.move_down 10
 
-      pdf.text "Event: #{@event.title}", size: 20, style: :bold
-      pdf.text "Date: #{@event.start_date.strftime('%B %d, %Y')}", size: 16
-      pdf.text "Location: #{@event.location}", size: 16
-      pdf.move_down 20
+      pdf.text "Event: #{@event.title}", size: 12, style: :bold
+      pdf.text "Date: #{@event.start_date.strftime('%B %d, %Y')}", size: 10
+      pdf.text "Location: #{@event.location}", size: 10
+      pdf.move_down 10
 
-      pdf.text "Attendee: #{@user.name}", size: 16
-      pdf.text "Quantity: #{@registration.quantity}", size: 16
-      pdf.move_down 20
+      pdf.text "Attendee: #{@user.name}", size: 10
+      pdf.text "Quantity: #{@registration.quantity}", size: 10
+      pdf.move_down 10
 
       qr_code = generate_qr_code
-      pdf.image StringIO.new(qr_code.to_s), width: 100, height: 100, position: :center
-      pdf.move_down 20
+      pdf.image StringIO.new(qr_code.to_s), width: 250, height: 250, position: :center
+      pdf.move_down 10
 
-      pdf.text "Thank you for registering!", size: 16, align: :center
+      pdf.text "Thank you for registering!", size: 10, align: :center
     end.render
 
     attach_pdf_to_registration(pdf_content)
@@ -49,13 +49,13 @@ class TicketPdfGenerator
       quantity: @registration.quantity
     }.to_json
     qrcode = RQRCode::QRCode.new(qr_code_content)
-    qrcode.as_png(size: 200)
+    qrcode.as_png(size: 250)
   end
 
   def attach_pdf_to_registration(pdf_content)
     @registration.ticket_pdf.attach(
       io: StringIO.new(pdf_content),
-      filename: "ticket_#{@registration.id}.pdf",
+      filename: "ticket_#{@qr_code_uuid}.pdf",
       content_type: 'application/pdf'
     )
     # @registration.ticket.build()
