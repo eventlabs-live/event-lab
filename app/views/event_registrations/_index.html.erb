@@ -1,25 +1,37 @@
-<div class="min-w-full flex justify-center">
-  <table class="table-auto w-3/4 shadow-md mt-5 mb-5 bg-white rounded-lg">
-    <thead>
-    <tr class="bg-gray-100">
-      <th colspan="4" class="border p-4 border-gray-200 leading-normal text-lg font-medium text-gray-800">Registrations</th>
-    </tr>
-    <tr class="text-left bg-gray-100">
-      <th class="px-4 py-2 text-gray-600 font-bold">User</th>
-      <th class="px-4 py-2 text-gray-600 font-bold">Quantity</th>
-      <th class="px-4 py-2 text-gray-600 font-bold">Status</th>
-      <th class="px-4 py-2 text-gray-600 font-bold">Registered On</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @event_registrations.each do |registration| %>
-      <tr>
-        <td class="border px-4 py-2"><%= registration.user.name %></td>
-        <td class="border px-4 py-2"><%= registration.quantity %></td>
-        <td class="border px-4 py-2"><%= registration.status %></td>
-        <td class="border px-4 py-2"><%= registration.created_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+<div class="flex flex-col">
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table
+          class="min-w-full text-left text-sm font-light text-surface dark:text-white">
+          <thead
+            class="border-b border-neutral-200 font-medium dark:border-white/10">
+          <tr>
+            <th scope="col" class="px-2 py-2">User</th>
+            <th scope="col" class="px-2 py-2">Status</th>
+            <th scope="col" class="px-2 py-2">Qty</th>
+            <th scope="col" class="px-2 py-2">Date</th>
+          </tr>
+          </thead>
+
+
+          <tbody>
+          <% @event_registrations.each do |registration| %>
+            <tr>
+              <td class="border text-left px-2 py-2"><%= registration.user.name %></td>
+              <td class="border text-left px-2 py-2"><%= registration.status %></td>
+              <td class="border text-left px-2 py-2"><%= registration.quantity %></td>
+              <td class="border text-left px-2 py-2">
+                <%= registration.created_at.localtime.strftime("%Y-%m-%d") %><br>
+                <%#= registration.created_at.localtime.strftime("%H:%M") %>
+              </td>
+              <!--        <td class="border px-4 py-2"><%#= registration.created_at.localtime.strftime("%Y-%m-%d %H:%M:%S") %></td>-->
+            </tr>
+          <% end %>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
