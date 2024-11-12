@@ -61,6 +61,7 @@ export default class extends Controller {
             console.log(data);
           this.resultTarget.textContent = "SUCCESS = TRUE";
           this.resultTarget.classList.add(data.success ? 'text-green-500' : 'text-red-500');
+          this.stopScanner()
           this.disconnect();
         })
         .catch(error => {
@@ -69,6 +70,7 @@ export default class extends Controller {
           console .log("!!!!!!!!!  ERROR ABOVE  !!!!!!!!!\n");
           this.resultTarget.textContent = "Failed to process check-in";
           this.resultTarget.classList.add('text-red-500');
+          this.stopScanner()
           this.disconnect();
         })
   }
