@@ -16,17 +16,6 @@
 <!-- MAIN CONTAINER-->
 <div class="w-full flex h-svh max-h-svh">
 
-  <!-- left side area -->
-  <% if false #request.fullpath == '/dashboard' && user_signed_in? %>
-  <aside class="hidden md:block h-full flex-[0.3]">
-    <!-- Left Sidebar Content -->
-    <div class="grid h-full place-content-center">
-
-      <%= render "layouts/left_side_bar" %>
-    </div>
-  </aside>
-  <% end %>
-
   <!-- MAIN AREA CONTAINER-->
   <div class="h-full flex-1">
     <!-- Main Content area, divided vertically into header, content, and footer sections using flexbox-->
@@ -65,16 +54,6 @@
 
     </div>
   </div>
-
-  <!-- Right Sidebar area-->
-  <% if false %>
-  <aside class="hidden lg:block h-full flex-[0.3]">
-    <!-- Right Sidebar content -->
-    <div class="grid h-full place-content-center">
-      <%= render "layouts/right_side_bar" %>
-    </div>
-  </aside>
-    <% end %>
 
 </div>
 
