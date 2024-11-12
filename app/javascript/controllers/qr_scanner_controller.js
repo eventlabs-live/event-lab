@@ -1,17 +1,13 @@
 import { Controller } from "@hotwired/stimulus"
 import QrScanner from "qr-scanner"
-// import { BrowserQRCodeReader } from "@zxing/library"
-// Connects to data-controller="qr-scanner"
-// app/javascript/controllers/qr_scanner_controller.js
 
 export default class extends Controller {
-  static targets = ["video", "result", "startScanner", "stopScanner", "details"]
+  static targets = ["video", "result", "startScanner", "stopScanner", "details", "overlay"]
 
   connect() {
     console .log("QR Scanner connected");
     this.startScannerTarget.addEventListener('click', () => this.initializeScanner());
     this.stopScannerTarget.addEventListener('click', () => this.stopScanner());
-    window.addEventListener('resize', () => this.updateScanner());
     console .log("QR Scanner initialized");
   }
 
@@ -19,12 +15,18 @@ export default class extends Controller {
     try {
       this.detailsTarget.classList.add("hidden");
       this.videoTarget.classList.remove('hidden');
+      this.overlayTarget.classList.remove('hidden');
+      this.startScannerTarget.classList.add('hidden');
+      this.stopScannerTarget.classList.remove('hidden');
       this.scanner = new QrScanner(
           this.videoTarget,
           result => this.handleScan(result),
           {
-            highlightScanRegion: true,
+            maxScansPerSecond:1,
+            highlightScanRegion:  true ,
             highlightCodeOutline: true,
+            overlay: this.overlayTarget,
+            returnDetailedScanResult: true
           }
       )
       await this.scanner.start()
@@ -68,27 +70,26 @@ export default class extends Controller {
         })
   }
 
-  updateScanner() {
-    if (this.scanner) {
-      this.scanner.stop();
-      this.scanner.start();
-    }
-  }
-
   stopScanner() {
     if (this.scanner) {
       this.scanner.stop();
+      this.overlayTarget.classList.add('hidden');
       this.videoTarget.classList.add('hidden');
       this.detailsTarget.classList.remove('hidden');
+      this.startScannerTarget.classList.remove('hidden');
+      this.stopScannerTarget.classList.add('hidden');
     }
   }
 
   disconnect() {
     if (this.scanner) {
       this.scanner.destroy()
+      this.scanner = null;
     }
     this.detailsTarget.classList.remove("hidden");
-    window.removeEventListener('resize', () => this.updateScanner());
+    // this.resizeHandler = () => this.updateScanner();
+    // window.addEventListener('resize', this.resizeHandler);
+    // window.removeEventListener('resize', this.resizeHandler);
 
   }
 }
