@@ -86,3 +86,5 @@ gem 'image_processing'  # Image handling
 gem 'money-rails'  # Money handling
 gem 'aasm'  # State machine
 gem 'after_commit_everywhere', '~> 1.0'  # Callbacks
+gem 'browser'  # Browser detection
+

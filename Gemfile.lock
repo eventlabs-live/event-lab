@@ -114,6 +114,7 @@ GEM
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
+    browser (6.1.0)
     builder (3.3.0)
     capybara (3.40.0)
       addressable
@@ -392,6 +393,7 @@ DEPENDENCIES
   after_commit_everywhere (~> 1.0)
   aws-sdk-s3
   bootsnap
+  browser
   capybara
   debug
   devise
