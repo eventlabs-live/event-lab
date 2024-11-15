@@ -68,19 +68,12 @@
               </label>
             </div>
           </fieldset>
-
       </section>
-
     </main>
-
-
-    <div class="mb-5">
-      <%= form.label :invite_list, "Invite List" %>
-      <%= form.text_field :invite_list, placeholder: "Invite List", value: "Invite List",
-                          class: "gap-2.5 self-stretch p-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]",
-                          required: true %>
+    <div>
+      <%= form.label :status %>
+      <%= form.select :status, Event.statuses.keys.map { |status| [status.humanize, status] }, selected: 'published'  %>
     </div>
-
-    <%= form.submit "Publish Event From 6", class: "gap-2.5 self-stretch px-5 py-2.5 max-w-full text-2xl font-semibold text-center text-white whitespace-nowrap rounded-xl bg-violet-950 min-h-[52px] tracking-[2.2px] w-[338px]" %>
+    <%= form.submit "Publish", class: "gap-2.5 self-stretch px-5 py-2.5 max-w-full text-2xl font-semibold text-center text-white whitespace-nowrap rounded-xl bg-blue-500 min-h-[52px] tracking-[2.2px] w-[338px]" %>
   <% end %>
 </div>

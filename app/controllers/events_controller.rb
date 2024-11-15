@@ -78,7 +78,7 @@ class EventsController < ApplicationController
 
     if params[:id].present?
       @event = Event.find(params[:id])
-      # @event.assign_attributes(event_params)
+      @event.assign_attributes(event_params)
       @event.current_step = next_step
     else
       @event = Event.new(event_params)
@@ -114,13 +114,13 @@ class EventsController < ApplicationController
   def event_params
     permitted_params = params.require(:event).permit(
       :event_type, :occasion, :start_time, :end_time,
-      :title, :description, :start_date, :end_date, :location, :step,
+      :title, :description, :start_date, :end_date, :location, :step, :invite_list, :budget_item,
       :venue, :cover_image, :status, gallery_images: [], ticket_types: [],
       ticket_types_attributes: [:name, :description, :price, :capacity]
     ).merge(id: params[:id])
 
     # Remove unnecessary parameters
-    permitted_params.except(:event_type, :occasion, :start_time, :end_time)
+    permitted_params.except(:event_type, :occasion, :start_time, :end_time, :invite_list, :budget_item)
   end
 
   def event_owner?

@@ -10,19 +10,20 @@
     <%= form.text_field :title, placeholder: "Event Name", class: "gap-2.5 self-stretch p-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]", required: true %>
   </div>
 
-  <div class="mb-5">
-    <%= form.label :event_type, "Event Type", class: "sr-only" %>
-    <%= form.select :event_type, options_for_select([["Event Type", ""], ["Birthday", "birthday"], ["Wedding", "wedding"], ["Conference", "conference"]]), {},
+<!--  <div class="mb-5">-->
+    <%#= form.label :event_type, "Event Type" %>
+    <%#= form.select :event_type, options_for_select([ ["Birthday", "birthday"], ["Wedding", "wedding"],
+                                                      ["Conference", "conference"],["Party", "Party"], ["Gig", "Gig"], "party"]), {},
                     class: "gap-2.5 self-stretch p-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]",
                     required: true %>
-  </div>
+<!--  </div>-->
 
-  <div class="mb-5">
-    <%= form.label :occasion, "Occasion", class: "sr-only" %>
-    <%= form.text_field :occasion, placeholder: "Occasion",
+<!--  <div class="mb-5">-->
+    <%#= form.label :occasion, "Occasion", class: "sr-only" %>
+    <%#= form.text_field :occasion, placeholder: "Occasion",
                         class: "gap-2.5 self-stretch p-5 w-full whitespace-nowrap bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]",
                         required: true %>
-  </div>
+<!--  </div>-->
 
   <div class="flex gap-8 items-start mb-5">
     <div>
@@ -61,6 +62,6 @@
     <%= form.text_area :description, placeholder: "Event Description", class: "gap-2.5 px-5 pt-5 pb-20 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[110px]", required: true %>
   </div>
 
-  <%= form.submit "Continue From 1", class: "gap-2.5 self-stretch px-5 py-2.5 max-w-full text-2xl font-semibold text-center text-white whitespace-nowrap rounded-xl bg-violet-950 min-h-[52px] tracking-[2.2px] w-[338px]" %>
+  <%= form.submit "Continue", class: "gap-2.5 self-stretch px-5 py-2.5 max-w-full text-2xl font-semibold text-center text-white whitespace-nowrap rounded-xl bg-blue-500 min-h-[52px] tracking-[2.2px] w-[338px]" %>
 <% end %>
 </div>

@@ -16,10 +16,16 @@
             <a href="#all-contacts" class="gap-2.5 self-stretch p-2.5 my-auto">All Contacts</a>
             <a href="#add-new" class="gap-2.5 self-stretch p-2.5 my-auto border-b-2 border-black">Add New</a>
           </nav>
-          <form class="flex flex-col mt-5 max-w-full whitespace-nowrap w-[319px]">
+          <div class="flex flex-col mt-5 max-w-full whitespace-nowrap w-[319px]">
             <div class="flex flex-col items-end self-center w-full text-base leading-none max-w-[319px] text-neutral-400">
-              <label for="name" class="sr-only">Name</label>
-              <input type="text" id="name" placeholder="Name" class="gap-2.5 self-stretch p-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]" />
+
+              <div class="mb-5">
+                <%= form.label :invitee_name, "Invitee Name" %>
+                <%= form.text_field :invitee_name, placeholder: "Invitee Name", value: "Invitee Name",
+                                    class: "gap-2.5 self-stretch p-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]",
+                                    required: false %>
+              </div>
+
               <label for="contact" class="sr-only">Contact</label>
               <input type="text" id="contact" placeholder="Contact" class="gap-2.5 self-stretch p-5 mt-6 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]" />
               <label for="email" class="sr-only">Email</label>
@@ -28,25 +34,20 @@
             <button type="submit" class="gap-2.5 self-stretch px-5 py-2.5 mt-9 w-full text-2xl font-semibold text-center text-black rounded-xl border border-black border-solid min-h-[52px] tracking-[2.2px]">
               Add
             </button>
-          </form>
-        </div>
-        <div class="flex overflow-hidden absolute right-1.5 z-0 flex-col items-center self-start max-w-full text-base font-semibold leading-none h-[50px] min-h-[50px] text-zinc-300 top-[58px] w-[351px]">
-          <div class="flex gap-2.5 items-center px-4 py-3 w-full bg-white border-black border-solid shadow-sm border-[0.5px] min-h-[46px] rounded-[30px]">
-            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c2bfdc84f088bcb3401f1244862c37639f213cc4aa013c529e9f8360c73eb2ce?placeholderIfAbsent=true&apiKey=ebef20be8ac64715b20aad6afc45aaac" class="object-contain shrink-0 self-stretch my-auto aspect-square w-[22px]" alt="Search icon" />
-            <label for="search-contact" class="sr-only">Search Contact</label>
-            <input type="text" id="search-contact" placeholder="Search Contact" class="self-stretch my-auto bg-transparent border-none outline-none" />
           </div>
         </div>
+<!--        <div class="flex overflow-hidden absolute right-1.5 z-0 flex-col items-center self-start max-w-full text-base font-semibold leading-none h-[50px] min-h-[50px] text-zinc-300 top-[58px] w-[351px]">-->
+<!--          <div class="flex gap-2.5 items-center px-4 py-3 w-full bg-white border-black border-solid shadow-sm border-[0.5px] min-h-[46px] rounded-[30px]">-->
+<!--            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c2bfdc84f088bcb3401f1244862c37639f213cc4aa013c529e9f8360c73eb2ce?placeholderIfAbsent=true&apiKey=ebef20be8ac64715b20aad6afc45aaac" class="object-contain shrink-0 self-stretch my-auto aspect-square w-[22px]" alt="Search icon" />-->
+<!--            <label for="search-contact" class="sr-only">Search Contact</label>-->
+<!--            <input type="text" id="search-contact" placeholder="Search Contact" class="self-stretch my-auto bg-transparent border-none outline-none" />-->
+<!--          </div>-->
+<!--        </div>-->
 
     </main>
-  <div class="mb-5">
-    <%= form.label :invite_list, "Invite List" %>
-    <%= form.text_field :invite_list, placeholder: "Invite List", value: "Invite List",
-                        class: "gap-2.5 self-stretch p-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]",
-                        required: true %>
-  </div>
 
-  <%= form.submit "Continue From 4", class: "gap-2.5 self-stretch px-5 py-2.5 max-w-full text-2xl font-semibold text-center text-white whitespace-nowrap rounded-xl bg-violet-950 min-h-[52px] tracking-[2.2px] w-[338px]" %>
+
+  <%= form.submit "Continue", class: "gap-2.5 self-stretch px-5 py-2.5 max-w-full text-2xl font-semibold text-center text-white whitespace-nowrap rounded-xl bg-blue-500 min-h-[52px] tracking-[2.2px] w-[338px]" %>
 <% end %>
 
 </div>

@@ -33,21 +33,26 @@
     <div class="bg-white shadow-md rounded p-1">
       <div class="relative w-full h-full flex items-center justify-center">
         <%= link_to event_path(event) do %>
-          <%=  image_tag 'ticket_stub_blank.png', class: "w-full h-full" %>
-          <div class="absolute bottom-0  md:bottom-ß lg:bottom-10 left-[17.25%]">
-            <p class="text-center font-bold sm:font-normal text-xs md:text-lg lg:text-lg transform -rotate-90 origin-left whitespace-nowrap"><%= event.start_date.strftime('%d-%m-%y@%I:%M') %></p>
-          </div>
-          <div class="absolute top-1 lg:top-4 left-[25%] text-brown h-[95%] w-[70%] overflow-hidden">
-
-            <div class="grid-cols-1 h-full flex flex-col justify-between">
-              <div>
-                <p class="text-black font-bold truncate ..."><%= event.title %></p>
-                <p class="text-red-800 truncate ...">At <%= event.location %></p>
-              </div>
-              <p class="text-center text-gray-600 text-xs font-bold capitalize">By <%= event.organizer.name %></p>
+          <% if event.cover_image.attached? %>
+            <%= image_tag event.cover_image,  class: "w-full h-full" %>
+          <% else %>
+            <%=  image_tag 'ticket_stub_blank.png', class: "w-full h-full" %>
+            <div class="absolute bottom-0  md:bottom-ß lg:bottom-10 left-[17.25%]">
+              <p class="text-center font-bold sm:font-normal text-xs md:text-lg lg:text-lg transform -rotate-90 origin-left whitespace-nowrap"><%= event.start_date.strftime('%d-%m-%y@%I:%M') %></p>
             </div>
+            <div class="absolute top-1 lg:top-4 left-[25%] text-brown h-[95%] w-[70%] overflow-hidden">
 
-          </div>
+              <div class="grid-cols-1 h-full flex flex-col justify-between">
+                <div>
+                  <p class="text-black font-bold truncate ..."><%= event.title %></p>
+                  <p class="text-red-800 truncate ...">At <%= event.location %></p>
+                </div>
+                <p class="text-center text-gray-600 text-xs font-bold capitalize">By <%= event.organizer.name %></p>
+              </div>
+
+            </div>
+          <% end %>
+
         <% end %>
       </div>
     </div>

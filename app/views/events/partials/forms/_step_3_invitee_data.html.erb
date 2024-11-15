@@ -60,40 +60,6 @@
                         required: true %>
   </div>
 
-  <%= form.submit "Continue From 3", class: "gap-2.5 self-stretch px-5 py-2.5 max-w-full text-2xl font-semibold text-center text-white whitespace-nowrap rounded-xl bg-violet-950 min-h-[52px] tracking-[2.2px] w-[338px]" %>
+  <%= form.submit "Continue", class: "gap-2.5 self-stretch px-5 py-2.5 max-w-full text-2xl font-semibold text-center text-white whitespace-nowrap rounded-xl bg-blue-500 min-h-[52px] tracking-[2.2px] w-[338px]" %>
 <% end %>
-
-<%# puts "MEDIA FORM STEP 3" %>
-<%#= form_with model: @event, url: @event.persisted? ? save_draft_event_path(@event) : events_path,
-              method: @event.persisted? ? :patch : :post,
-              data: { controller: "event_form", action: "ajax:success->event_form#navigate",  turbo_frame: "form_step" },
-              class: "flex flex-col mt-10 max-w-full text-base leading-none text-neutral-400",
-              local: false do |form| %>
-
-<!--  <section class="flex flex-col justify-center items-center px-4 pb-4 mt-14 w-80 max-w-full rounded-xl border border-black border-dashed min-h-[322px]" aria-labelledby="drag-drop-title">-->
-<!--    <h2 id="drag-drop-title" class="sr-only">Media Upload Section</h2>-->
-<!--    <div class="flex flex-col items-center">-->
-<!--      <div class="flex relative gap-3 items-start py-2">-->
-<!--        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/f1d512389f26fb8dae7ed1c450f5766db8be1c7d6fd8c5e207525c1261d4d13f?placeholderIfAbsent=true&apiKey=ebef20be8ac64715b20aad6afc45aaac" class="object-contain z-0 shrink-0 aspect-square w-[30px]" alt="Image icon"/>-->
-<!--        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/0bc275d17aabf0f281ba51fdc807ec1107864aed34f1d94d2d587ec076e6c9fe?placeholderIfAbsent=true&apiKey=ebef20be8ac64715b20aad6afc45aaac" class="object-contain z-0 shrink-0 aspect-square w-[30px]" alt="Video icon"/>-->
-<!--        <div class="absolute bottom-0 z-0 shrink-0 w-0 border border-black border-dashed h-[46px] right-[35px]" aria-hidden="true"></div>-->
-<!--      </div>-->
-<!--      <p class="mt-2.5 text-sm leading-none text-black">-->
-<!--        Drag and drop media here-->
-<!--      </p>-->
-<!--    </div>-->
-<!--    <button class="flex gap-2.5 justify-center items-center py-2.5 pr-5 pl-5 mt-10 max-w-full text-xl font-semibold text-center text-white bg-gray-700 rounded-xl min-h-[52px] tracking-[2px] w-[229px] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700" type="button">-->
-<!--      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/20ef909ec81afe0c76869cb0a0ddc95a8d6a4e6aa46d1f742c53ca2e0ba91095?placeholderIfAbsent=true&apiKey=ebef20be8ac64715b20aad6afc45aaac" class="object-contain shrink-0 aspect-[0.94] w-[30px]" alt=""/>-->
-<!--      <span>Upload Media</span>-->
-<!--    </button>-->
-<!--  </section>-->
-<!--  <div class="mb-5">-->
-    <%#= form.label :file_name, "File Name" %>
-    <%#= form.text_field :file_name, placeholder: "File Name", value: "file name",
-                        class: "gap-2.5 self-stretch p-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]",
-                        required: true %>
-<!--  </div>-->
-
-  <%#= form.submit "Continue Dave", class: "gap-2.5 self-stretch px-5 py-2.5 max-w-full text-2xl font-semibold text-center text-white whitespace-nowrap rounded-xl bg-violet-950 min-h-[52px] tracking-[2.2px] w-[338px]" %>
-<%# end %>
 </div>

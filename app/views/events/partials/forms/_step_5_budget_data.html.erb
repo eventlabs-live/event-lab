@@ -8,10 +8,14 @@
 
     <% puts "INSIDE BUDGET FORM STEP 5" %>
 
-    <form class="flex flex-col mt-8 max-w-full w-[319px]">
+    <div class="flex flex-col mt-8 max-w-full w-[319px]">
       <div class="flex flex-col self-center w-full text-base leading-none max-w-[319px] text-neutral-400">
-        <label for="commodityName" class="sr-only">Commodity Name</label>
-        <input id="commodityName" type="text" placeholder="Commodity Name" class="gap-2.5 self-stretch p-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]" />
+        <div class="mb-5">
+          <%= form.label :budget_item, "Budget Item" %>
+          <%= form.text_field :budget_item, placeholder: "Budget Item", value: "Budget Item",
+                              class: "gap-2.5 self-stretch p-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]",
+                              required: false %>
+        </div>
         <label for="budgetAllocated" class="sr-only">Budget Allocated</label>
         <input id="budgetAllocated" type="text" placeholder="Budget Allocated" class="gap-2.5 self-stretch p-5 mt-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]" />
         <label for="description" class="sr-only">Description</label>
@@ -20,7 +24,7 @@
       <button type="submit" class="gap-2.5 self-stretch px-5 py-2.5 mt-9 w-full text-2xl font-semibold text-center text-black whitespace-nowrap rounded-xl border border-black border-solid min-h-[52px] tracking-[2.2px]">
         Add
       </button>
-    </form>
+    </div>
     <section class="flex flex-col mt-8 max-w-full text-black w-[319px]">
       <article class="flex flex-col w-full max-w-[319px]">
         <div class="flex gap-10 justify-between items-start w-full text-base font-semibold tracking-wider text-center whitespace-nowrap">
@@ -28,7 +32,9 @@
           <p>300$</p>
         </div>
         <p class="mt-4 text-xs tracking-wide">
-          Lorem ipsum dolor sit amet consectetur. Pellentesque nullam enim quis elit arcu. Bibendum varius sit eleifend nisi vel. Ut porttitor etiam vehicula in. Purus et interdum sem et elementum amet viverra in. Morbi.
+          Lorem ipsum dolor sit amet consectetur. Pellentesque nullam enim quis elit arcu.
+          Bibendum varius sit eleifend nisi vel. Ut porttitor etiam vehicula in.
+          Purus et interdum sem et elementum amet viverra in. Morbi.
         </p>
       </article>
       <div class="flex gap-10 justify-between items-start mt-11 w-full text-base tracking-wider text-center whitespace-nowrap">
@@ -37,13 +43,6 @@
       </div>
     </section>
 
-    <div class="mb-5">
-      <%= form.label :invite_list, "Invite List" %>
-      <%= form.text_field :invite_list, placeholder: "Invite List", value: "Invite List",
-                          class: "gap-2.5 self-stretch p-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]",
-                          required: true %>
-    </div>
-
-    <%= form.submit "Continue From 5 ", class: "gap-2.5 self-stretch px-5 py-2.5 max-w-full text-2xl font-semibold text-center text-white whitespace-nowrap rounded-xl bg-violet-950 min-h-[52px] tracking-[2.2px] w-[338px]" %>
+    <%= form.submit "Continue", class: "gap-2.5 self-stretch px-5 py-2.5 max-w-full text-2xl font-semibold text-center text-white whitespace-nowrap rounded-xl bg-blue-500 min-h-[52px] tracking-[2.2px] w-[338px]" %>
   <% end %>
 </div>
