@@ -34,8 +34,8 @@
       <div class="relative w-full h-full flex items-center justify-center">
         <%= link_to event_path(event) do %>
           <%=  image_tag 'ticket_stub_blank.png', class: "w-full h-full" %>
-          <div class="absolute bottom-1  md:bottom-ß lg:bottom-10 left-[17.5%]">
-            <p class="text-center font-bold sm:font-normal text-xs md:text-lg lg:text-lg transform -rotate-90 origin-left whitespace-nowrap"><%= event.start_date %></p>
+          <div class="absolute bottom-0  md:bottom-ß lg:bottom-10 left-[17.25%]">
+            <p class="text-center font-bold sm:font-normal text-xs md:text-lg lg:text-lg transform -rotate-90 origin-left whitespace-nowrap"><%= event.start_date.strftime('%d-%m-%y@%I:%M') %></p>
           </div>
           <div class="absolute top-1 lg:top-4 left-[25%] text-brown h-[95%] w-[70%] overflow-hidden">
 
@@ -62,8 +62,9 @@
       <a href="#" class="text-sm text-gray-600">See All</a>
     </div>
 
-    <div class="grid grid-cols-2 gap-4">
-      <% @trending_events&.each do |event| %>
+    <div class="grid grid-row-1 gap-4">
+      <% 3.times do |event| %>
+      <%= render "article" %>
 
       <% end %>
     </div>
@@ -98,9 +99,9 @@
   <%# Event Listings %>
   <section class="">
     <div class="con">
-      <div class="flex items-center justify-between">
-        <h3 class="text-2xl font-semibold">Browsing events in New York City</h3>
-        <div class="flex justify-start">
+      <div class="flex flex-col items-center justify-between">
+        <h3 class="text-2xl font-semibold">Browsing events in New York City</h3></br
+        <div class="grid grid-rows-1 justify-start space-x-2">
           <button class="px-1 py-1 text-sm rounded-full border border-gray-300 hover:bg-gray-50">All</button>
           <button class="px-1 py-1 text-sm rounded-full border border-gray-300 hover:bg-gray-50">For You</button>
           <button class="px-1 py-1 text-sm rounded-full border border-gray-300 hover:bg-gray-50">Online</button>
@@ -110,7 +111,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
-        <% 8.times do %>
+        <% 4.times do %>
           <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <div class="aspect-w-16 aspect-h-9 bg-gray-200"></div>
             <div class="p-1">

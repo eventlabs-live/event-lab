@@ -42,18 +42,23 @@ class EventsController < ApplicationController
   end
 
   def create
-    # @event = Event.new(event_params)
-    # authorize @event
+    puts "!!!! IN CREATE !!!!"
+
     command = Events::CreateEventCommand.new(params: event_params, organizer: current_user)
     if command.call
-      redirect_to dashboard_index_path, notice: 'Event created successfully.'
+      @event = command.event
+      @event.current_step = 2 # Move to next step for rendering.
+      @event.save
+      render turbo_stream: turbo_stream.replace("event-form-container", partial: step_partial, locals: { event: @event })
     else
+      @event.current_step = 1 # Stay on the same step for rendering.
       flash.now[:alert] = "Invalid Data!"
-      render :new, status: :unprocessable_entity
+      render turbo_stream: turbo_stream.replace("event-form-container", partial: step_partial, locals: { event: @event })
     end
   end
 
   def update
+    puts "!!!! IN SAVE UPDATE !!!!"
     command = Events::UpdateEventCommand.call(params: event_params, organizer: current_user)
     if command.success?
       redirect_to @event, notice: 'Event was successfully updated.'
@@ -66,6 +71,25 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     redirect_to events_url, notice: 'Event was successfully destroyed.'
+  end
+
+  def save_draft
+    puts "!!!! IN SAVE DRAFT !!!!"
+
+    if params[:id].present?
+      @event = Event.find(params[:id])
+      # @event.assign_attributes(event_params)
+      @event.current_step = next_step
+    else
+      @event = Event.new(event_params)
+    end
+
+    if @event.save
+      # render turbo_stream: turbo_stream.replace("form_step", partial: step_partial, locals: { event: @event })
+      render turbo_stream: turbo_stream.replace("event-form-container", partial: step_partial, locals: { event: @event })
+    else
+      render turbo_stream: turbo_stream.replace("event-form-container", partial: step_partial, locals: { event: @event })
+    end
   end
 
   private
@@ -88,14 +112,44 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(
-      :title, :description, :start_date, :end_date, :location,
+    permitted_params = params.require(:event).permit(
+      :event_type, :occasion, :start_time, :end_time,
+      :title, :description, :start_date, :end_date, :location, :step,
       :venue, :cover_image, :status, gallery_images: [], ticket_types: [],
       ticket_types_attributes: [:name, :description, :price, :capacity]
     ).merge(id: params[:id])
+
+    # Remove unnecessary parameters
+    permitted_params.except(:event_type, :occasion, :start_time, :end_time)
   end
 
   def event_owner?
     current_user == @event.organizer
+  end
+
+  def next_step
+    @event.current_step + 1
+  end
+
+  def step_partial(step = nil)
+    switcher = step || @event.current_step
+    case switcher
+    when 1
+      "events/partials/forms/step_1_basic_data"
+    when 2
+      "events/partials/forms/step_2_media_data"
+    when 3
+      "events/partials/forms/step_3_invitee_data"
+    when 4
+      "events/partials/forms/step_4_contact_data"
+    when 5
+      "events/partials/forms/step_5_budget_data"
+    when 6
+      "events/partials/forms/step_6_payment_data"
+    when 7
+      "events/partials/forms/step_7_completed"
+    else
+      "events/partials/forms/step_1_basic_data"
+    end
   end
 end

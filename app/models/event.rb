@@ -10,8 +10,8 @@ class Event < ApplicationRecord
   has_many :attendees, through: :event_registrations
   has_one_attached :cover_image
   has_many_attached :gallery_images
-  validates :title, :start_date, :end_date, :location, presence: true
-  validate :end_date_after_start_date
+  # validates :title, :start_date, :end_date, :location, presence: true
+  # validate :end_date_after_start_date
 
   scope :featured_events, -> { where(featured: true, status: Event.statuses[:published]) }
 
@@ -61,5 +61,7 @@ class Event < ApplicationRecord
     self.start_date ||= Date.today
     self.end_date ||= Date.today
     self.ticket_types << TicketType.default(self) if self.ticket_types.empty?
+    # self.status ||= :draft
+    self.current_step ||= 1
   end
 end

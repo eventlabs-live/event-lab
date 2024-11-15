@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_10_105641) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_15_051455) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -77,11 +77,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_10_105641) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "start_date"
+    t.datetime "start_date", precision: nil
     t.datetime "end_date"
     t.boolean "featured"
     t.string "category"
     t.integer "clicks"
+    t.integer "current_step"
     t.index ["organizer_id"], name: "index_events_on_organizer_id"
   end
 

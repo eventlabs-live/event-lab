@@ -45,18 +45,21 @@
   </div>
 
   <div id="registered-events" data-tabs-target="content" class="tab-content hidden">
-    <div class="space-y-4">
-      <% @event_registrations.each do |registration| %>
-        <div class="bg-white shadow rounded p-4">
-          <h3 class="text-xl font-semibold text-gray-800"><%= registration.event.title %></h3>
-          <p class="text-gray-600">Event Date: <%= registration.event.start_date.strftime('%B %d, %Y') %></p>
-          <% if registration.ticket_pdf.attached? %>
-            <%= link_to 'Download PDF', rails_blob_path(registration.ticket_pdf, disposition: 'attachment'), class: "text-blue-500 hover:underline" %>
-          <% else %>
-            <p class="text-red-500">No PDF available</p>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+    <%= render partial: 'dashboard/event_registrations', collection: @event_registrations, as: :registration %>
+
+<!--    <div class="space-y-4">-->
+      <%# @event_registrations.each do |registration| %>
+<!--        <div class="bg-white shadow rounded p-4">-->
+<!--          <h3 class="text-xl font-semibold text-gray-800"><%#= registration.event.title %></h3>-->
+<!--          <p class="text-gray-600">Event Date: <%#= registration.event.start_date.strftime('%B %d, %Y') %></p>-->
+          <%# if registration.ticket_pdf.attached? %>
+            <%#= link_to 'Download PDF', rails_blob_path(registration.ticket_pdf, disposition: 'attachment'), class: "text-blue-500 hover:underline" %>
+          <%# else %>
+<!--            <p class="text-red-500">No PDF available</p>-->
+          <%# end %>
+<!--        </div>-->
+      <%# end %>
+<!--    </div>-->
+
   </div>
 </div>

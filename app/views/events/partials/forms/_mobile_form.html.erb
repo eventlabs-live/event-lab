@@ -1,0 +1,14 @@
+<section class="flex flex-col justify-center items-center self-center mt-3.5 w-full">
+
+
+
+  <div id="event-form-container">
+
+    <%= form_with(model: @event, url: next_step_events_path(step: 1), method: :post, local: false, id: "event-form") do |form| %>
+      <%= turbo_frame_tag "step 1" %>
+      <%= render "events/partials/forms/step_1_basic_data", f: form %>
+      <%= form.submit "Continue", class: "gap-2.5 self-stretch px-5 py-2.5 max-w-full text-2xl font-semibold text-center text-white whitespace-nowrap rounded-xl bg-violet-950 min-h-[52px] tracking-[2.2px] w-[338px]" %>
+    <% end %>
+  </div>
+
+</section>

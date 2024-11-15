@@ -1,12 +1,14 @@
-<h2 class="text-2xl font-bold text-gray-800 mb-6">Create a New Event</h2>
-
-
-
 <div>
   <% if device_type == :mobile %>
-    <%= render "events/mobile_form,html", event: @event, button_text: 'Create' %>
-  <% elsif device_type == :tablet %>
-    <%= render "layouts/tablet_content" %>
+
+    <section>
+      <%= render "events/partials/forms/form_header" %>
+      <div id="event-form-container">
+
+          <%= render "events/partials/forms/step_1_basic_data", event: @event %>
+
+      </div>
+    </section>
   <% else %>
     <%#= render "layouts/desktop_content" %>
     <%= render "form", event: @event, button_text: 'Create' %>

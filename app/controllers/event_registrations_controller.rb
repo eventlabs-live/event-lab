@@ -31,6 +31,12 @@ class EventRegistrationsController < ApplicationController
     @event_registration = EventRegistration.find(params[:registration_id])
   end
 
+  def booked_for
+    @event_registrations = current_user.event_registrations
+    # render partial: "dashboard/event_registrations"
+    render partial: "event_registrations/event_bookings"
+  end
+
   private
 
   def set_event

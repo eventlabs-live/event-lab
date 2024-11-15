@@ -1,0 +1,49 @@
+<div id="event-form-container">
+  <% puts "INVITEE FORM STEP 5" %>
+  <%= form_with model: @event, url: @event.persisted? ? save_draft_event_path(@event) : events_path,
+                method: @event.persisted? ? :patch : :post,
+                data: { controller: "event_form", action: "ajax:success->event_form#navigate" },
+                class: "flex flex-col mt-10 max-w-full text-base leading-none text-neutral-400",
+                local: false do |form| %>
+
+    <% puts "INSIDE BUDGET FORM STEP 5" %>
+
+    <form class="flex flex-col mt-8 max-w-full w-[319px]">
+      <div class="flex flex-col self-center w-full text-base leading-none max-w-[319px] text-neutral-400">
+        <label for="commodityName" class="sr-only">Commodity Name</label>
+        <input id="commodityName" type="text" placeholder="Commodity Name" class="gap-2.5 self-stretch p-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]" />
+        <label for="budgetAllocated" class="sr-only">Budget Allocated</label>
+        <input id="budgetAllocated" type="text" placeholder="Budget Allocated" class="gap-2.5 self-stretch p-5 mt-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]" />
+        <label for="description" class="sr-only">Description</label>
+        <textarea id="description" placeholder="Description" class="gap-2.5 px-5 pt-5 pb-20 mt-5 w-full whitespace-nowrap bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[110px]"></textarea>
+      </div>
+      <button type="submit" class="gap-2.5 self-stretch px-5 py-2.5 mt-9 w-full text-2xl font-semibold text-center text-black whitespace-nowrap rounded-xl border border-black border-solid min-h-[52px] tracking-[2.2px]">
+        Add
+      </button>
+    </form>
+    <section class="flex flex-col mt-8 max-w-full text-black w-[319px]">
+      <article class="flex flex-col w-full max-w-[319px]">
+        <div class="flex gap-10 justify-between items-start w-full text-base font-semibold tracking-wider text-center whitespace-nowrap">
+          <h2>Decoration</h2>
+          <p>300$</p>
+        </div>
+        <p class="mt-4 text-xs tracking-wide">
+          Lorem ipsum dolor sit amet consectetur. Pellentesque nullam enim quis elit arcu. Bibendum varius sit eleifend nisi vel. Ut porttitor etiam vehicula in. Purus et interdum sem et elementum amet viverra in. Morbi.
+        </p>
+      </article>
+      <div class="flex gap-10 justify-between items-start mt-11 w-full text-base tracking-wider text-center whitespace-nowrap">
+        <h3 class="font-bold">Total</h3>
+        <p class="font-semibold">300$</p>
+      </div>
+    </section>
+
+    <div class="mb-5">
+      <%= form.label :invite_list, "Invite List" %>
+      <%= form.text_field :invite_list, placeholder: "Invite List", value: "Invite List",
+                          class: "gap-2.5 self-stretch p-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]",
+                          required: true %>
+    </div>
+
+    <%= form.submit "Continue From 5 ", class: "gap-2.5 self-stretch px-5 py-2.5 max-w-full text-2xl font-semibold text-center text-white whitespace-nowrap rounded-xl bg-violet-950 min-h-[52px] tracking-[2.2px] w-[338px]" %>
+  <% end %>
+</div>

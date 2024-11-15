@@ -1,0 +1,66 @@
+<div id="event-form-container">
+<%= form_with model: @event, url: @event.persisted? ? save_draft_event_path(@event) : events_path,
+              method: @event.persisted? ? :patch : :post,
+              data: { controller: "event_form", action: "ajax:success->event_form#navigate"},
+              class: "flex flex-col mt-10 max-w-full text-base leading-none text-neutral-400",
+              local: false do |form| %>
+
+  <div class="mb-5">
+    <%= form.label :title, "Event Name", class: "sr-only" %>
+    <%= form.text_field :title, placeholder: "Event Name", class: "gap-2.5 self-stretch p-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]", required: true %>
+  </div>
+
+  <div class="mb-5">
+    <%= form.label :event_type, "Event Type", class: "sr-only" %>
+    <%= form.select :event_type, options_for_select([["Event Type", ""], ["Birthday", "birthday"], ["Wedding", "wedding"], ["Conference", "conference"]]), {},
+                    class: "gap-2.5 self-stretch p-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]",
+                    required: true %>
+  </div>
+
+  <div class="mb-5">
+    <%= form.label :occasion, "Occasion", class: "sr-only" %>
+    <%= form.text_field :occasion, placeholder: "Occasion",
+                        class: "gap-2.5 self-stretch p-5 w-full whitespace-nowrap bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]",
+                        required: true %>
+  </div>
+
+  <div class="flex gap-8 items-start mb-5">
+    <div>
+      <%= form.label :start_date, "Start Date" %>
+      <%= form.date_field :start_date, class: "gap-2.5 self-stretch p-5 bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px] w-[153px]", step: 900, required: true %>
+    </div>
+    <div>
+      <%= form.label :start_time, "Start Time" %>
+      <%= form.time_field :start_time,
+                          value: ((@event.start_date || DateTime.now).advance(minutes: 15 - (DateTime.now.min % 15)).strftime("%H:%M")),
+                          class: "gap-2.5 self-stretch p-5 bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px] w-[153px]",
+                          step: 900, required: true %>
+    </div>
+  </div>
+
+  <div class="flex gap-8 items-start mb-5">
+    <div>
+      <%= form.label :end_date, "End Date" %>
+      <%= form.date_field :end_date, class: "gap-2.5 self-stretch p-5 bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px] w-[153px]", step: 900, required: true %>
+    </div>
+    <div>
+      <%= form.label :end_time, "End Time" %>
+      <%= form.time_field :end_time,
+                          value: (@event.end_date + 2.hour || Time.now + 2.hour).strftime("%H:%M"),
+                          class: "gap-2.5 self-stretch p-5 bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px] w-[153px]", step: 900, required: true %>
+    </div>
+  </div>
+
+  <div class="mb-5">
+    <%= form.label :location, "Location", class: "sr-only" %>
+    <%= form.text_field :location, placeholder: "Location", class: "gap-2.5 self-stretch p-5 w-full whitespace-nowrap bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]", required: true %>
+  </div>
+
+  <div class="mb-10">
+    <%= form.label :description, "Event Description", class: "sr-only" %>
+    <%= form.text_area :description, placeholder: "Event Description", class: "gap-2.5 px-5 pt-5 pb-20 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[110px]", required: true %>
+  </div>
+
+  <%= form.submit "Continue From 1", class: "gap-2.5 self-stretch px-5 py-2.5 max-w-full text-2xl font-semibold text-center text-white whitespace-nowrap rounded-xl bg-violet-950 min-h-[52px] tracking-[2.2px] w-[338px]" %>
+<% end %>
+</div>

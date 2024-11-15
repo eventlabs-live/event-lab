@@ -1,0 +1,86 @@
+<div id="event-form-container">
+  <% puts "INVITEE FORM STEP 5" %>
+  <%= form_with model: @event, url: @event.persisted? ? save_draft_event_path(@event) : events_path,
+                method: @event.persisted? ? :patch : :post,
+                data: { controller: "event_form", action: "ajax:success->event_form#navigate" },
+                class: "flex flex-col mt-10 max-w-full text-base leading-none text-neutral-400",
+                local: false do |form| %>
+
+    <% puts "INSIDE PAYMENT FORM STEP 6" %>
+
+    <main class="flex flex-col self-center mt-3.5 w-full">
+
+      <section class="flex flex-col justify-center items-center mt-12">
+        <p class="w-64 text-base font-medium tracking-wider leading-6 text-center text-black">
+          Please select payment methods to be linked with this Event
+        </p>
+
+          <fieldset class="flex flex-col items-start self-start text-base font-medium tracking-wider leading-none text-black">
+            <legend class="sr-only">Payment Methods</legend>
+            <div class="flex gap-6 items-center self-stretch pl-3.5">
+              <input type="checkbox" id="debitCredit" name="paymentMethod" value="debitCredit" class="sr-only" />
+              <label for="debitCredit" class="flex items-center cursor-pointer">
+              <span class="flex gap-2.5 items-start p-1 w-5 rounded border-gray-700 border-solid border-[3px]">
+                <span class="flex w-3 rounded-sm min-h-[12px]"></span>
+              </span>
+                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/3314bdf59fd1edbbb60206660a24de06b1ed93c117569748d5b3c08b35a04a95?placeholderIfAbsent=true&apiKey=ebef20be8ac64715b20aad6afc45aaac" class="object-contain shrink-0 self-stretch my-auto w-6 aspect-square ml-6" alt="" />
+                <span class="self-stretch my-auto ml-6">Debit/Credit Card</span>
+              </label>
+            </div>
+            <div class="flex gap-2 items-start mt-7 max-w-full whitespace-nowrap w-[178px]">
+              <input type="checkbox" id="upi" name="paymentMethod" value="upi" class="sr-only" />
+              <label for="upi" class="flex items-center cursor-pointer">
+              <span class="flex gap-2.5 items-start p-1 w-5 rounded border-gray-700 border-solid border-[3px]">
+                <span class="flex w-3 h-3 bg-gray-700 rounded-sm min-h-[12px]"></span>
+              </span>
+                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/04067bffc204b05284520abdf053aee8ba76e910aa28e7b60ec6b38556fdeb4b?placeholderIfAbsent=true&apiKey=ebef20be8ac64715b20aad6afc45aaac" class="object-contain shrink-0 aspect-[2.17] w-[50px] ml-2" alt="" />
+                <span>UPI</span>
+              </label>
+            </div>
+            <div class="flex gap-5 items-center pl-3.5 mt-7 max-w-full w-[178px]">
+              <input type="checkbox" id="onlineBanking" name="paymentMethod" value="onlineBanking" class="sr-only" />
+              <label for="onlineBanking" class="flex items-center cursor-pointer">
+              <span class="flex gap-2.5 items-start p-1 w-5 rounded border-gray-700 border-solid border-[3px]">
+                <span class="flex w-3 rounded-sm min-h-[12px]"></span>
+              </span>
+                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/9ea666cf5cec43d22686a37086bf67120ec601aebb23f5baab07eac152119a4e?placeholderIfAbsent=true&apiKey=ebef20be8ac64715b20aad6afc45aaac" class="object-contain shrink-0 self-stretch my-auto aspect-square w-[26px] ml-5" alt="" />
+                <span class="self-stretch my-auto ml-5">Online Banking</span>
+              </label>
+            </div>
+            <div class="flex gap-6 items-center pl-5 mt-7 max-w-full whitespace-nowrap w-[178px]">
+              <input type="checkbox" id="paypal" name="paymentMethod" value="paypal" class="sr-only" />
+              <label for="paypal" class="flex items-center cursor-pointer">
+              <span class="flex gap-2.5 items-start p-1 w-5 rounded border-gray-700 border-solid border-[3px]">
+                <span class="flex w-3 h-3 bg-gray-700 rounded-sm min-h-[12px]"></span>
+              </span>
+                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/374d7fcaf0c3c8fa6fac1e1f31e0169d5353d4c7b182a5fcaf20e80e4aa5494b?placeholderIfAbsent=true&apiKey=ebef20be8ac64715b20aad6afc45aaac" class="object-contain shrink-0 self-stretch my-auto aspect-[0.82] w-[18px] ml-6" alt="" />
+                <span class="self-stretch my-auto ml-6">Paypal</span>
+              </label>
+            </div>
+            <div class="flex gap-5 items-center pl-4 mt-7 max-w-full w-[178px]">
+              <input type="checkbox" id="giftCard" name="paymentMethod" value="giftCard" class="sr-only" />
+              <label for="giftCard" class="flex items-center cursor-pointer">
+              <span class="flex gap-2.5 items-start p-1 w-5 rounded border-gray-700 border-solid border-[3px]">
+                <span class="flex w-3 h-3 bg-gray-700 rounded-sm min-h-[12px]"></span>
+              </span>
+                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/eb35802678f3e9780b0a5f9755858bdacc65c3be92617552de8cbdd94e19fce1?placeholderIfAbsent=true&apiKey=ebef20be8ac64715b20aad6afc45aaac" class="object-contain shrink-0 self-stretch my-auto aspect-square w-[29px] ml-5" alt="" />
+                <span class="self-stretch my-auto ml-5">Gift Card</span>
+              </label>
+            </div>
+          </fieldset>
+
+      </section>
+
+    </main>
+
+
+    <div class="mb-5">
+      <%= form.label :invite_list, "Invite List" %>
+      <%= form.text_field :invite_list, placeholder: "Invite List", value: "Invite List",
+                          class: "gap-2.5 self-stretch p-5 w-full bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px]",
+                          required: true %>
+    </div>
+
+    <%= form.submit "Publish Event From 6", class: "gap-2.5 self-stretch px-5 py-2.5 max-w-full text-2xl font-semibold text-center text-white whitespace-nowrap rounded-xl bg-violet-950 min-h-[52px] tracking-[2.2px] w-[338px]" %>
+  <% end %>
+</div>
