@@ -37,8 +37,8 @@
             <%= image_tag event.cover_image,  class: "w-full h-full" %>
           <% else %>
             <%=  image_tag 'ticket_stub_blank.png', class: "w-full h-full" %>
-            <div class="absolute bottom-0  md:bottom-ß lg:bottom-10 left-[17.25%]">
-              <p class="text-center font-bold sm:font-normal text-xs md:text-lg lg:text-lg transform -rotate-90 origin-left whitespace-nowrap"><%= event.start_date.strftime('%d-%m-%y@%I:%M') %></p>
+            <div class="absolute bottom-0  md:bottom-ß lg:bottom-10 left-[17.5%]">
+              <p class="text-center font-bold sm:font-normal text-xs md:text-lg lg:text-lg transform -rotate-90 origin-left whitespace-nowrap overflow-hidden"><%= event.start_date.strftime('%d-%m-%y@%I:%M') %></p>
             </div>
             <div class="absolute top-1 lg:top-4 left-[25%] text-brown h-[95%] w-[70%] overflow-hidden">
 

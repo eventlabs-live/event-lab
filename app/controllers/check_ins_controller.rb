@@ -18,6 +18,10 @@ class CheckInsController < ApplicationController
     @event = Event.find(params[:event_id])
   end
 
+  def index
+    @future_events = Event.upcoming
+  end
+
   def qr_params
     params.require(:barcode).permit!.to_h
   end
