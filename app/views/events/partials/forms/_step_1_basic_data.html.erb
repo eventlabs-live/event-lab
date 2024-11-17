@@ -37,9 +37,9 @@
 
             <%= form.label :start_time, "Start Time" %>
             <%= form.time_field :start_time,
-                                value: (@event.start_date || DateTime.now).advance(minutes: 15 - (DateTime.now.min % 15)),
+                                value: (Time.now + 1.hour).strftime('%H:%M'),
                                 class: "gap-2.5 self-stretch p-5 bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px] w-[153px]",
-                                step: 900, required: true %>
+                                 required: true %>
           </div>
         </div>
 
@@ -51,8 +51,8 @@
           <div>
             <%= form.label :end_time, "End Time" %>
             <%= form.time_field :end_time,
-                                value: (@event.end_date + 2.hour || Time.now + 2.hour),
-                                class: "gap-2.5 self-stretch p-5 bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px] w-[153px]", step: 900, required: true %>
+                                value: (Time.now + 2.hour).strftime('%H:%M'),
+                                class: "gap-2.5 self-stretch p-5 bg-white rounded-3xl border border-black border-solid shadow-sm min-h-[55px] w-[153px]",  required: true %>
           </div>
         </div>
 

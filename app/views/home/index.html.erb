@@ -1,5 +1,7 @@
 <%# app/views/home/index.html.erb %>
 
+<div class="container mx-auto px-2">
+
 <% unless user_signed_in? %>
 <section>
   <%# Hero Banner %>
@@ -17,17 +19,35 @@
 
   <!-- Trending Events Section -->
   <section class="mb-8">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-lg font-semibold text-indigo-900">Trending Events</h2>
-<!--      <a href="#" class="text-sm text-gray-600">See All</a>-->
-    </div>
+<!--    <div class="flex justify-between items-center mb-4">-->
+<!--      <h2 class="text-lg font-semibold text-indigo-900">Trending Events</h2>-->
+      <!--      <a href="#" class="text-sm text-gray-600">See All</a>-->
+<!--    </div>-->
 
-    <div class="grid grid-row-1 gap-4">
-      <%# 3.times do |event| %>
-      <%= render "article", locals: { trending: @trending_events} %>
 
-      <%# end %>
+<!--    <section class="container mb-8">-->
+
+      <div class="flex flex-col bg-white m-auto p-auto">
+        <div class="flex overflow-x-auto pb-10">
+<!--          <div class="flex flex-nowrap ml-2">-->
+<!--            <div class="overflow-x-scroll">-->
+
+            <%= render partial: "article", locals: { trending: @trending_events } %>
+
+<!--          </div>-->
+<!--        </div>-->
+      </div>
     </div>
+    <style>
+        .hide-scroll-bar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .hide-scroll-bar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<!--    </section>-->
   </section>
 
   <!-- Most Popular Section -->
@@ -113,3 +133,4 @@
       </div>
     </div>
   </section>
+</div>
