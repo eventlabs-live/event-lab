@@ -1,4 +1,8 @@
+<section class="container mx-auto mt-0 h-[100%]">
+
 <h2 class="text-2xl font-bold text-gray-800 mb-6">Browse Events</h2>
+
+<%= render partial: "events/partials/categories", locals: { categories: @categories} %>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
   <% @events.each do |event| %>
@@ -9,3 +13,4 @@
     </div>
   <% end %>
 </div>
+</section>

@@ -10,6 +10,8 @@ class Event < ApplicationRecord
   has_many :attendees, through: :event_registrations
   has_one_attached :cover_image
   has_many_attached :gallery_images
+  belongs_to :category, optional: true
+  belongs_to :subcategory, optional: true
   # validates :title, :start_date, :end_date, :location, presence: true
   # validate :end_date_after_start_date
 

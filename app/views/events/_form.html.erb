@@ -11,6 +11,18 @@
     <%= form.text_field :description, class: "w-full border rounded p-2" %>
   </div>
 
+  <section class="flex flex-col justify-center items-center px-4 pb-4 mt-14 w-80 max-w-full rounded-xl border border-black border-dashed" aria-labelledby="drag-drop-title">
+    <h2 id="drag-drop-title" class="sr-only">Media Upload Section</h2>
+
+      <div class="flex flex-col items-center py-2">
+        <%= form.file_field :cover_image, multiple: false, class: "flex gap-3 items-center cursor-pointer", id: "cover-image-upload" %>
+        <%= form.label :cover_image do %>
+          <div class="border border-black border-dashed" aria-hidden="true"></div>
+        <% end %>
+      </div>
+
+  </section>
+
   <div>
     <%= form.label :start_date, "Event Start Date", class: "block font-semibold" %>
     <%= form.date_field :start_date, class: "w-full border rounded p-2" %>

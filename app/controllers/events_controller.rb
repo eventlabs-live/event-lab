@@ -11,7 +11,14 @@ class EventsController < ApplicationController
   helper_method :event_owner?
 
   def index
-    @events = Event.published.order(start_date: :asc)
+    @categories = Category.all
+    if params[:category].present?
+      @category = Category.find_by(name: params[:category])
+      @events = @category.events.published.order(start_date: :asc)
+    else
+      @events = Event.published.order(start_date: :asc)
+    end
+    # @events = Event.published.order(start_date: :asc)
   end
 
   def show

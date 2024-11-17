@@ -1,0 +1,21 @@
+
+<section class="py-12 bg-gray-50">
+  <div class="text-pretty container mx-auto px-4 w-[85%] ">
+    <h3 class="text-2xl font-semibold mb-2 row-span-1 text-center block">Categories</h3>
+    <div class="flex flex-wrap justify-center gap-6">
+
+      <% categories.each do |category| %>
+        <div class="grid items-center">
+          <%= link_to events_path(category: category.name) do %>
+            <div class="relative w-20 h-20">
+              <div class="top-0 w-16 h-16 bg-white rounded-full shadow-md flex justify-center mb-2">
+                <%# Add category icon here %>
+              </div>
+              <span class="bottom-0 text-sm text-green-500 w-16 text-center text-wrap block"><%= category.name %></span>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

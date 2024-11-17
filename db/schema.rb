@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_15_051455) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_17_100611) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_15_051455) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "check_ins", force: :cascade do |t|
@@ -83,7 +89,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_15_051455) do
     t.string "category"
     t.integer "clicks"
     t.integer "current_step"
+    t.bigint "category_id"
+    t.bigint "subcategory_id"
+    t.index ["category_id"], name: "index_events_on_category_id"
     t.index ["organizer_id"], name: "index_events_on_organizer_id"
+    t.index ["subcategory_id"], name: "index_events_on_subcategory_id"
+  end
+
+  create_table "followers", force: :cascade do |t|
+    t.bigint "follower_id", null: false
+    t.bigint "followed_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_followers_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_followers_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_followers_on_follower_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -95,6 +115,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_15_051455) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["registration_id"], name: "index_payments_on_registration_id"
+  end
+
+  create_table "subcategories", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_subcategories_on_category_id"
   end
 
   create_table "ticket_types", force: :cascade do |t|
@@ -140,8 +168,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_15_051455) do
   add_foreign_key "event_registrations", "events"
   add_foreign_key "event_registrations", "tickets"
   add_foreign_key "event_registrations", "users"
+  add_foreign_key "events", "categories"
+  add_foreign_key "events", "subcategories"
   add_foreign_key "events", "users", column: "organizer_id"
+  add_foreign_key "followers", "users", column: "followed_id"
+  add_foreign_key "followers", "users", column: "follower_id"
   add_foreign_key "payments", "event_registrations", column: "registration_id"
+  add_foreign_key "subcategories", "categories"
   add_foreign_key "ticket_types", "events"
   add_foreign_key "tickets", "event_registrations"
   add_foreign_key "tickets", "ticket_types"
