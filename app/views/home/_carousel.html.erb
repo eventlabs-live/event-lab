@@ -1,23 +1,33 @@
-<section class="flex justify-center">
+<section class="container mx-auto w-[85%] flex justify-center">
+  <div data-controller="carousel" class="relative sm:w-96 h-64 sm:h-80 md:h-96 lg:h-128">
 
-  <div data-controller="carousel"
-       class="relative overflow-hidden w-full sm:w-96 h-64 sm:h-80 md:h-96 lg:h-128 mx-auto">
-    <div class="carousel-inner flex">
+    <!-- Carousel wrapper -->
+    <div class="flex items-center h-full w-full overflow-hidden">
+      <figure data-carousel-target="slide">
+        <%= image_tag 'event_labs_log.png', class: "object-contain" %>
+      </figure>
 
-      <div data-carousel-target="slide"
-           class="carousel-item flex-shrink-0 w-full h-full flex items-center justify-center">
-        <%= image_tag 'event_labs_log.png', class: "w-full h-full object-cover" %>
-      </div>
+      <figure data-carousel-target="slide">
+        <%= image_tag 'ticket_stub_blank.png', class: "object-contain" %>
+      </figure>
 
-      <div data-carousel-target="slide" class="carousel-item flex-shrink-0 w-full h-full flex items-center justify-center">
-        <%= image_tag 'ticket_stub_blank.png', class: "w-full h-full object-cover" %>
-      </div>
-
-      <div data-carousel-target="slide" class="carousel-item flex-shrink-0 w-full h-full flex items-center justify-center">
-        <%= image_tag 'ticket_stub_series.png', class: "w-full h-full object-cover" %>
-      </div>
+      <figure data-carousel-target="slide">
+        <%= image_tag 'ticket_stub_series.png', class: "object-contain" %>
+      </figure>
     </div>
-    <button data-action="carousel#prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-600 text-white p-2 rounded-full opacity-75 hover:opacity-100">Prev</button>
-    <button data-action="carousel#next" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-600 text-white p-2 rounded-full opacity-75 hover:opacity-100">Next</button>
+
+    <button data-action="carousel#prev"
+            class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-transparent text-slate-400 rounded-full opacity-25 hover:opacity-75">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+      </svg>
+
+    </button>
+    <button data-action="carousel#next"
+            class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-transparent text-slate-400 rounded-full opacity-25 hover:opacity-75">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+      </svg>
+    </button>
   </div>
 </section>
