@@ -1,136 +1,96 @@
 <%# app/views/home/index.html.erb %>
 
-<div class="container mx-auto px-2">
+<div class="max-w-full mx-auto md:px-2">
+  <% if device_type != :mobile %>
 
-<% unless user_signed_in? %>
-<section>
-  <%# Hero Banner %>
-  <%= render partial: 'shared/hero_banner', locals: { hero: @hero } %>
-</section>
-<% end %>
+    <section>
+      <%# Hero Banner %>
+      <%= render partial: 'shared/hero_banner', locals: { hero: @hero } %>
+    </section>
 
+    <div class="my-6">
+      <%= render partial: 'carousel', locals: { hero: @hero } %>
+    </div>
 
-<%= render partial: 'carousel', locals: { hero: @hero} %>
+    <%# Categories only available on full app%>
 
-<%# Categories %>
-<%=render partial: "categories", locals: { categories: @categories} %>
+    <%= render partial: "categories", locals: { categories: @categories } %>
+  <% end %>
+
 
 <%# Ticket Stub Display Section - removed to be used elsewhere %>
 
-  <!-- Trending Events Section -->
-  <section class="mb-8">
-<!--    <div class="flex justify-between items-center mb-4">-->
-<!--      <h2 class="text-lg font-semibold text-indigo-900">Trending Events</h2>-->
-      <!--      <a href="#" class="text-sm text-gray-600">See All</a>-->
-<!--    </div>-->
-
-
-<!--    <section class="container mb-8">-->
-
-      <div class="flex flex-col bg-white m-auto p-auto">
-        <div class="flex overflow-x-auto pb-10">
-<!--          <div class="flex flex-nowrap ml-2">-->
-<!--            <div class="overflow-x-scroll">-->
-
-            <%= render partial: "article", locals: { trending: @trending_events } %>
-
-<!--          </div>-->
-<!--        </div>-->
+  <% if device_type == :mobile %>
+    <!-- Trending Events Section -->
+    <section>
+      <div class="flex justify-between lg:justify-center items-center mb-4">
+        <h2 class="text-lg font-semibold text-indigo-900">Trending Events</h2>
+        <%# <a href="#" class="text-sm text-gray-600">See All</a> %>
       </div>
-    </div>
-    <style>
-        .hide-scroll-bar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        .hide-scroll-bar::-webkit-scrollbar {
-            display: none;
-        }
-    </style>
-<!--    </section>-->
-  </section>
+
+      <div class="mb-8 flex justify-center">
+
+        <div class="flex flex-col bg-white max-w-[319px]">
+
+
+          <div class="flex overflow-x-auto pb-10 hide-scroll-bar">
+            <div class="flex flex-nowrap">
+              <%= render partial: "article", locals: { trending: @trending_events } %>
+            </div>
+          </div>
+        </div>
+        <style>
+            .hide-scroll-bar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+
+            .hide-scroll-bar::-webkit-scrollbar {
+                display: none;
+            }
+        </style>
+      </div>
+    </section>
+
+  <% end %>
 
   <!-- Most Popular Section -->
-  <section class="mb-8">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-lg font-semibold text-indigo-900">Most Popular</h2>
-      <a href="#" class="text-sm text-gray-600">See All</a>
-    </div>
+  <% if false %>
+    <!--  <section class="mb-8">-->
+    <!--    <div class="flex justify-between items-center mb-4">-->
+    <!--      <h2 class="text-lg font-semibold text-indigo-900">Most Popular</h2>-->
+    <%# <a href="#" class="text-sm text-gray-600">See All</a> %>
+    <!--    </div>-->
 
-<!--     Similar grid structure as Trending Events-->
-    <div class="grid grid-cols-2 gap-4">
-      <% @popular_events&.each do |event| %>
-<!--         Similar card structure as above-->
-      <% end %>
-    </div>
-  </section>
+    <!--     Similar grid structure as Trending Events-->
+    <!--    <div class="grid grid-cols-2 gap-4">-->
+    <%# @popular_events&.each do |event| %>
+    <!--         Similar card structure as above-->
+    <%# end %>
+    <!--    </div>-->
+    <!--  </section>-->
+  <% end %>
 
+  <% if device_type == :mobile %>
   <!-- More Events Section -->
   <section>
     <h2 class="text-lg font-semibold text-indigo-900 mb-4">More Events</h2>
     <div class="grid grid-cols-2 gap-4">
       <% @more_events&.each do |event| %>
-<!--         Similar card structure as above-->
+        Similar card structure as above
       <% end %>
     </div>
   </section>
+    <% end %>
 
+  <% if device_type != :mobile %>
+
+    <div class="flex flex-col bg-white max-w-screen-2xl">
+      <%= render partial: "large_screen_sections" %>
+    </div>
+  <% end %>
 
   <%# Event Listings %>
-  <section class="">
-    <div class="con">
-      <div class="flex flex-col items-center justify-between">
-        <h3 class="text-2xl font-semibold">Browsing events in New York City</h3></br
-        <div class="grid grid-rows-1 justify-start space-x-2">
-          <button class="px-1 py-1 text-sm rounded-full border border-gray-300 hover:bg-gray-50">All</button>
-          <button class="px-1 py-1 text-sm rounded-full border border-gray-300 hover:bg-gray-50">For You</button>
-          <button class="px-1 py-1 text-sm rounded-full border border-gray-300 hover:bg-gray-50">Online</button>
-          <button class="px-1 py-1 text-sm rounded-full border border-gray-300 hover:bg-gray-50">Today</button>
-          <button class="px-1 py-1 text-sm rounded-full border border-gray-300 hover:bg-gray-50">Free</button>
-        </div>
-      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
-        <% 4.times do %>
-          <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <div class="aspect-w-16 aspect-h-9 bg-gray-200"></div>
-            <div class="p-1">
-              <div class="flex justify-between items-start mb-2">
-                <h4 class="font-semibold">Event Title</h4>
-                <span class="text-sm text-gray-500">Free/Paid</span>
-              </div>
-              <div class="text-sm text-gray-600 mb-2">
-                <p>Saturday, Oct 22</p>
-                <p>10:41 pm</p>
-                <p>Park Avenue Garden, NYC</p>
-              </div>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-2">
-                  <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
-                  <span class="text-sm text-gray-600">Organizer Name</span>
-                </div>
-                <button class="px-4 py-2 text-sm text-white bg-purple-600 rounded-lg hover:bg-purple-700">Book Now</button>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </section>
 
-  <%# Interests Section %>
-  <section class="py-12 bg-gray-50 shadow border-gray-200">
-    <div class="container mx-auto px-4">
-      <h3 class="text-2xl font-semibold mb-4">Let's make it personal!</h3>
-      <p class="text-gray-600 mb-8">Select your interests to get event suggestions based on what you love</p>
-      <div class="flex flex-wrap gap-4">
-        <% interests = ['Badminton', 'Cricket', 'Music', 'Cooking', 'Travelling', 'Dancing', 'Art', 'Designing', 'Political Science', 'Party', 'Singing', 'EDM'] %>
-        <% interests.each do |interest| %>
-          <button class="px-4 py-2 text-sm rounded-full border border-gray-300 hover:bg-gray-50">
-            <%= interest %>
-          </button>
-        <% end %>
-      </div>
-    </div>
-  </section>
-</div>
+  </div>

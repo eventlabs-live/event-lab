@@ -5,13 +5,13 @@
     <div class="flex flex-wrap justify-center gap-6">
 
       <% categories.each do |category| %>
-        <div class="grid items-center">
+        <div class="grid justify-center">
           <%= link_to events_path(category: category.name) do %>
-            <div class="relative w-20 h-20">
-              <div class="top-0 w-16 h-16 bg-white rounded-full shadow-md flex justify-center mb-2">
+            <div class="relative w-64 h-64 items-center">
+              <div class="top-0 w-24 h-24 bg-white rounded-full shadow-md flex mb-2">
                 <%# Add category icon here %>
               </div>
-              <span class="bottom-0 text-sm text-green-500 w-16 text-center text-wrap block"><%= category.name %></span>
+              <span class="bottom-0 text-lg font-bold text-black-500 w-20 text-wrap block"><%= category.name %></span>
             </div>
           <% end %>
         </div>

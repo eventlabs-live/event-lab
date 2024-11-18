@@ -18,5 +18,5 @@ header, section, footer, aside, nav, main, article, figure, div[class] {
 }
 html, body {
     width: auto!important;
-    overflow-x: hidden;
+    overflow-x: hidden;!important;
 }

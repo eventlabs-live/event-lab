@@ -48,10 +48,12 @@
         </div>
       </footer>
 
+      <% if current_user %>
       <!-- BOTTOM NAVIGATION -->
       <nav class="sticky top-0 block py-5 lg:hidden">
         <%= render "layouts/botton_navigation" %>
       </nav>
+        <% end %>
 
     </div>
   </div>
