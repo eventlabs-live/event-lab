@@ -1,0 +1,89 @@
+<div class="flex flex-col">
+  <div class="flex justify-center mb-4">
+    <%= render "shared/mobile_search" %>
+  </div>
+
+  <!-- Trending Events Section -->
+  <section>
+    <div class="flex justify-between lg:justify-center items-center mb-4">
+      <h2 class="text-lg font-bold text-indigo-900 ml-2">Trending Events</h2>
+      <%# <a href="#" class="text-sm text-gray-600">See All</a> %>
+    </div>
+    <!-- Events Carousel -->
+    <div class="mb-8 flex justify-center">
+      <div class="flex flex-col bg-white max-w-[319px]">
+        <div class="flex overflow-x-auto pb-10 hide-scroll-bar">
+          <div class="flex flex-nowrap">
+            <%= render partial: "events_cards_horizontal", locals: { event_list: @trending_events } %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Most Popular Section -->
+  <section>
+    <div class="flex justify-between lg:justify-center items-center mb-4">
+      <h2 class="text-lg font-bold text-indigo-900 ml-2">Most Popular</h2>
+      <%# <a href="#" class="text-sm text-gray-600">See All</a> %>
+    </div>
+    <!-- Events Carousel -->
+    <div class="mb-8 flex justify-center">
+      <div class="flex flex-col bg-white max-w-[319px]">
+        <div class="flex overflow-x-auto pb-10 hide-scroll-bar">
+          <div class="flex flex-nowrap">
+            <%= render partial: "events_cards_horizontal", locals: { event_list: @more_events } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- More Events Section -->
+  <section>
+    <div class="flex justify-between lg:justify-center items-center mb-4">
+      <h2 class="text-lg font-bold text-indigo-900 ml-2">More Events</h2>
+      <%# <a href="#" class="text-sm text-gray-600">See All</a> %>
+    </div>
+    <div class="grid grid-cols-2 shrink content-start">
+      <%= render partial: "events_cards_verticle", locals: { event_list: @trending_events } %>
+    </div>
+  </section>
+  <style>
+      .hide-scroll-bar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
+
+      .hide-scroll-bar::-webkit-scrollbar {
+          display: none;
+      }
+  </style>
+
+</div>
+
+
+<!-- Most Popular Section -->
+<% if false %>
+  <!--  <section class="mb-8">-->
+  <!--    <div class="flex justify-between items-center mb-4">-->
+  <!--      <h2 class="text-lg font-semibold text-indigo-900">Most Popular</h2>-->
+  <%# <a href="#" class="text-sm text-gray-600">See All</a> %>
+  <!--    </div>-->
+
+  <!--     Similar grid structure as Trending Events-->
+  <!--    <div class="grid grid-cols-2 gap-4">-->
+  <%# @popular_events&.each do |event| %>
+  <!--         Similar card structure as above-->
+  <%# end %>
+  <!--    </div>-->
+  <!--  </section>-->
+<% end %>
+
+
+
+
+<%# Event Listings %>
+
+

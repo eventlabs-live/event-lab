@@ -1,7 +1,7 @@
 <%# app/views/home/index.html.erb %>
 
-<div class="max-w-full mx-auto md:px-2">
-  <% if device_type != :mobile %>
+<div class="max-w-full md:px-2">
+  <% if device_type == :desktop %>
 
     <section>
       <%# Hero Banner %>
@@ -21,37 +21,7 @@
 <%# Ticket Stub Display Section - removed to be used elsewhere %>
 
   <% if device_type == :mobile %>
-    <!-- Trending Events Section -->
-    <section>
-      <div class="flex justify-between lg:justify-center items-center mb-4">
-        <h2 class="text-lg font-semibold text-indigo-900">Trending Events</h2>
-        <%# <a href="#" class="text-sm text-gray-600">See All</a> %>
-      </div>
-
-      <div class="mb-8 flex justify-center">
-
-        <div class="flex flex-col bg-white max-w-[319px]">
-
-
-          <div class="flex overflow-x-auto pb-10 hide-scroll-bar">
-            <div class="flex flex-nowrap">
-              <%= render partial: "article", locals: { trending: @trending_events } %>
-            </div>
-          </div>
-        </div>
-        <style>
-            .hide-scroll-bar {
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-            }
-
-            .hide-scroll-bar::-webkit-scrollbar {
-                display: none;
-            }
-        </style>
-      </div>
-    </section>
-
+      <%= render partial: "mobile_index", locals: { event_list: @trending_events } %>
   <% end %>
 
   <!-- Most Popular Section -->
@@ -72,16 +42,8 @@
   <% end %>
 
   <% if device_type == :mobile %>
-  <!-- More Events Section -->
-  <section>
-    <h2 class="text-lg font-semibold text-indigo-900 mb-4">More Events</h2>
-    <div class="grid grid-cols-2 gap-4">
-      <% @more_events&.each do |event| %>
-        Similar card structure as above
-      <% end %>
-    </div>
-  </section>
-    <% end %>
+
+  <% end %>
 
   <% if device_type != :mobile %>
 
@@ -93,4 +55,4 @@
   <%# Event Listings %>
 
 
-  </div>
+</div>
