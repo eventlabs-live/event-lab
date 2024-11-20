@@ -19,7 +19,14 @@ class Event < ApplicationRecord
 
   scope :upcoming, -> { where('start_date >= ? AND status = ?', Date.current, Event.statuses[:published]).order(start_date: :asc) }
 
+  #ToDo define logic for trending events, e.g weighted on tickets sold, followed, views
   scope :trending, -> { self.upcoming.order(clicks: :desc) }
+
+  #ToDo define logic for most popular events, e.g tickets sold
+  scope :most_popular, -> { self.upcoming.order(clicks: :desc).limit(10) }
+
+  #ToDo define logic for 'more' events, e.g upcoming events
+  scope :more_events, -> { where('start_date >= ? AND status = ?', Date.current, Event.statuses[:published]).order(start_date: :asc) }
 
   enum status: {
     draft: 1,
