@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "flowbite": "^2.5.2"
+  },
+  "engines": {
+    "node": "20.10.0"
   }
 }
