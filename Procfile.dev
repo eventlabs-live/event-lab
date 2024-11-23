@@ -1,3 +1,4 @@
 css: bin/rails tailwindcss:watch --trace
 migration: bundle exec rake db:migrate
 web: bin/rails server
+web: npm start
