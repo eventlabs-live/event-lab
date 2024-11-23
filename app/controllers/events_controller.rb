@@ -120,7 +120,6 @@ class EventsController < ApplicationController
 
   def event_params
 
-
     permitted_params = params.require(:event).permit(
       :event_type, :occasion, :title, :description, :start_date, :end_date,
       :location, :step, :invite_list, :budget_item,
@@ -131,7 +130,6 @@ class EventsController < ApplicationController
     unless params[:event][:start_date].present?
       params.require(:event).merge(start_date: merge_start_date_params)
       permitted_params = permitted_params.merge(start_date: merge_start_date_params)
-
     end
 
     unless params[:event][:end_date].present?
@@ -139,9 +137,6 @@ class EventsController < ApplicationController
       permitted_params = permitted_params.merge(end_date: merge_end_date_params)
     end
 
-    # merge_start_date_params
-    # merge_end_date_params
-    # Remove unnecessary parameters
     permitted_params.except(:event_type, :occasion, :invite_list, :budget_item, :start_date_text, :end_date_text, :start_time, :end_time,)
   end
 
@@ -149,8 +144,6 @@ class EventsController < ApplicationController
     if params[:event][:start_date_text].present? && params[:event][:start_time].present?
       start_date = Date.parse(params[:event][:start_date_text])
       start_time = Time.parse(params[:event][:start_time])
-      params[:event][:start_date] = DateTime.new(start_date.year, start_date.month, start_date.day, start_time.hour, start_time.min)
-      puts params[:event][:start_date]
       return DateTime.new(start_date.year, start_date.month, start_date.day, start_time.hour, start_time.min)
     end
   end
@@ -159,8 +152,6 @@ class EventsController < ApplicationController
     if params[:event][:end_date_text].present? && params[:event][:end_time].present?
       end_date = Date.parse(params[:event][:end_date_text])
       end_time = Time.parse(params[:event][:end_time])
-      params[:event][:end_date] = DateTime.new(end_date.year, end_date.month, end_date.day, end_time.hour, end_time.min)
-      puts params[:event][:end_date]
       return DateTime.new(end_date.year, end_date.month, end_date.day, end_time.hour, end_time.min)
     end
   end

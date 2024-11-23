@@ -1,56 +1,39 @@
 <%# Event Listings %>
 
 <section>
-
   <div class="flex flex-row mb-2 justify-center">
     <span> <h3 class="text-2xl font-semibold row-span-1 text-center">Browsing events in Melbourne</h3></span>
   </div>
   <div class="flex flex-row justify-center mb-6">
-<!--    <div class="flex flex-col items-center justify-between">-->
       <div class="flex flex-row justify-between space-x-12">
         <button class="px-1 py-1 text-lg font-light rounded-full hover:bg-gray-50">All</button>
         <button class="px-1 py-1 text-lg font-light rounded-full hover:bg-gray-50">For You</button>
         <button class="px-1 py-1 text-lg font-light rounded-full hover:bg-gray-50">Online</button>
         <button class="px-1 py-1 text-lg font-light rounded-full hover:bg-gray-50">Today</button>
         <button class="px-1 py-1 text-lg font-light rounded-full hover:bg-gray-50">Free</button>
+        <button class="px-1 py-1 text-lg font-light rounded-full hover:bg-gray-50">Music</button>
+        <button class="px-1 py-1 text-lg font-light rounded-full hover:bg-gray-50">Community</button>
+        <button class="px-1 py-1 text-lg font-light rounded-full hover:bg-gray-50">Sports</button>
       </div>
-<!--    </div>-->
-  </div>
-
-  <div class="flex justify-center">
-  <div class="grid grid-cols-4 gap-3 justify-center">
-    <% 12.times do %>
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <div class="aspect-w-16 aspect-h-9 bg-gray-200"></div>
-        <div class="p-1">
-          <div class="flex justify-between items-start mb-2">
-            <h4 class="font-semibold">Event Title</h4>
-            <span class="text-sm text-gray-500">Free/Paid</span>
-          </div>
-          <div class="text-sm text-gray-600 mb-2">
-            <p>Saturday, Oct 22</p>
-            <p>10:41 pm</p>
-            <p>Park Avenue Garden, NYC</p>
-          </div>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-              <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
-              <span class="text-sm text-gray-600">Organizer Name</span>
-            </div>
-            <button class="px-4 py-2 text-sm text-white bg-purple-600 rounded-lg hover:bg-purple-700">Book Now
-            </button>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
   </div>
 </section>
 
-<%# Interests Section %>
-<!--<div class="flex justify-center ">-->
+<!-- ALL Events Section -->
 
-<section class="py-12 bg-gray-50 mx-auto shadow border-gray-200 w-[100%]">
+<section>
+  <div class="flex justify-center">
+    <div class="grid grid-cols-4 gap-3 justify-center">
+          <%= render partial: "events_cards_horizontal", locals: { event_list: @trending_events } %>
+
+    </div>
+  </div>
+</section>
+
+<!--  All Events Section -->
+
+<%# Interests Section %>
+
+<section class="py-12 bg-gray-50 mx-auto shadow border-gray-200 w-[100%] flex justify-center">
   <div class="mx-auto px-4 ">
     <h3 class="text-2xl font-semibold mb-4">Let's make it personal!</h3>
     <p class="text-gray-600 mb-8">Select your interests to get event suggestions based on what you love</p>
@@ -64,5 +47,4 @@
     </div>
   </div>
 </section>
-<!--</div>-->
 

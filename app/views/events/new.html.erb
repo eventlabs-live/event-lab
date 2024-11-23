@@ -10,7 +10,9 @@
   <% else %>
     <%#= render "layouts/desktop_content" %>
     <div class="mx-auto w-[97.5%]">
+      <div id="event-form-container">
       <%= render "form", event: @event, button_text: 'Create' %>
+      </div>
     </div>
   <% end %>
 </div>

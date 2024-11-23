@@ -1,7 +1,7 @@
 <%# app/views/home/index.html.erb %>
 
 <div class="max-w-full md:px-2">
-  <% if device_type == :desktop %>
+  <% if device_type != :mobile %>
 
     <section>
       <%# Hero Banner %>
@@ -15,44 +15,15 @@
     <%# Categories only available on full app%>
 
     <%= render partial: "categories", locals: { categories: @categories } %>
-  <% end %>
-
-
-<%# Ticket Stub Display Section - removed to be used elsewhere %>
-
-  <% if device_type == :mobile %>
-      <%= render partial: "mobile_index", locals: { event_list: @trending_events } %>
-  <% end %>
-
-  <!-- Most Popular Section -->
-  <% if false %>
-    <!--  <section class="mb-8">-->
-    <!--    <div class="flex justify-between items-center mb-4">-->
-    <!--      <h2 class="text-lg font-semibold text-indigo-900">Most Popular</h2>-->
-    <%# <a href="#" class="text-sm text-gray-600">See All</a> %>
-    <!--    </div>-->
-
-    <!--     Similar grid structure as Trending Events-->
-    <!--    <div class="grid grid-cols-2 gap-4">-->
-    <%# @popular_events&.each do |event| %>
-    <!--         Similar card structure as above-->
-    <%# end %>
-    <!--    </div>-->
-    <!--  </section>-->
-  <% end %>
-
-  <% if device_type == :mobile %>
-
-  <% end %>
-
-  <% if device_type != :mobile %>
 
     <div class="flex flex-col bg-white max-w-screen-2xl">
       <%= render partial: "large_screen_sections" %>
     </div>
   <% end %>
 
-  <%# Event Listings %>
 
+  <% if device_type == :mobile %>
+    <%= render partial: "mobile_index", locals: { event_list: @trending_events } %>
+  <% end %>
 
 </div>

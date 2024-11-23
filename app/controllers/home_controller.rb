@@ -4,6 +4,5 @@ class HomeController < ApplicationController
     @categories = Category.all
     @events = Event.upcoming.limit(8)
     @trending_events = Event.trending.limit(10)
-    # @interests = Interest.featured
   end
 end
