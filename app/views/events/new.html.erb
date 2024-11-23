@@ -4,11 +4,13 @@
     <section>
       <%= render "events/partials/forms/form_header" %>
       <div id="event-form-container">
-          <%= render "events/partials/forms/step_1_basic_data", event: @event %>
+        <%= render "events/partials/forms/step_1_basic_data", event: @event %>
       </div>
     </section>
   <% else %>
     <%#= render "layouts/desktop_content" %>
-    <%= render "form", event: @event, button_text: 'Create' %>
+    <div class="mx-auto w-[97.5%]">
+      <%= render "form", event: @event, button_text: 'Create' %>
+    </div>
   <% end %>
 </div>
