@@ -15,13 +15,21 @@ class TicketPdfGenerator
       pdf.text "Event Ticket", size: 20, style: :bold, align: :center
       pdf.move_down 10
 
-      pdf.text "Event: #{@event.title}", size: 12, style: :bold
-      pdf.text "Date: #{@event.start_date.strftime('%B %d, %Y')}", size: 10
-      pdf.text "Location: #{@event.location}", size: 10
-      pdf.move_down 10
 
-      pdf.text "Attendee: #{@user.name}", size: 10
-      pdf.text "Quantity: #{@registration.quantity}", size: 10
+      pdf.bounding_box([0, pdf.cursor], width: pdf.bounds.width / 2) do
+        pdf.text "Event: #{@event.title}", size: 12, style: :bold
+        pdf.text "Date: #{@event.start_date.strftime('%B %d, %Y')}", size: 10
+        pdf.text "Location: #{@event.location}", size: 10
+        pdf.stroke_bounds
+      end
+
+      pdf.bounding_box([pdf.bounds.width / 2, pdf.cursor], width: pdf.bounds.width / 2) do
+
+        pdf.text "Booked By: #{@user.name}", size: 10
+        pdf.text "Total Quantity: #{@registration.quantity}", size: 10
+        # pdf.text "Sequence:  of #{@registration.quantity}", size: 10
+        pdf.stroke_bounds
+      end
       pdf.move_down 10
 
       qr_code = generate_qr_code
