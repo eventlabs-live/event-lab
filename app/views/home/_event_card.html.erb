@@ -16,25 +16,25 @@
     <div class="flex flex-col flex-1 w-full">
       <div class="flex gap-6 items-start w-full min-h-[30px]">
         <h3 class="flex-1 shrink text-lg font-bold leading-none text-black basis-0"><%= event.title.capitalize %></h3>
+        <!-- ellipsis button -->
         <button>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"/>
           </svg>
         </button>
       </div>
-      <div class="flex flex-col flex-1 w-full text-xs font-medium leading-none text-black">
-        <time datetime="2023-11-02T13:34:00"><%= event.start_date.strftime("%A, %b %d") %></time>
-        <time datetime="2023-11-02T13:34:00"><%= event.start_date.strftime("%I:%M %p") %></time>
+      <div class="flex flex-col flex-1 w-full text-xs text-base/1 font-normal leading-3 text-black">
+        <time datetime="2023-11-02T13:34:00"><%= event.start_date.strftime("%a, %b %d @ %I:%M %p") %></time>
         <address><%= event.location %></address>
       </div>
     </div>
     <div class="flex gap-3.5 items-center px-1 w-full text-black">
-      <div class="self-stretch my-auto text-xs font-medium leading-none"><%= event.organizer.name.capitalize %></div>
+      <div class="self-stretch my-auto text-xs font-medium leading-none"><%= "By #{event.organizer.name.capitalize}"%></div>
       <div class="flex-1 shrink self-stretch my-auto text-xs text-right basis-0"><%= " #{event.organizer.followers.count} followers" %></div>
     </div>
   </div>
 
-  <!-- book now button -->
+  <!-- favourite now button -->
   <div class="flex absolute right-1 top-5 z-0 flex-col pb-4 w-11 h-[43px]">
     <Button>
       <svg xmlns="http://www.w3.org/2000/svg" fill="fuchsia" fill-opacity="0.5"  viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-6 fill-fuchsia-500 bg-white/50 rounded">
@@ -42,5 +42,7 @@
       </svg>
     </button>
   </div>
-
 </div>
+
+<%= link_to 'Details & Tickets', event_path(event),
+            class: 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm text-center px-5 py-2.5 me-2 mt-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' %>
