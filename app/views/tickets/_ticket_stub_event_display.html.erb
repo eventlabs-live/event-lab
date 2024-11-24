@@ -18,10 +18,10 @@
                 <div class="h-full flex flex-row justify-between">
                   <div class="inline-block">
                     <% qr_code_content = {
-                      barcode_uuid: registration.ticket.qr_code,
-                      event: registration.event.title,
-                      event_date: registration.event.start_date,
-                      attendee: registration.user.name,
+                      barcode_uuid: registration.ticket&.qr_code,
+                      event: registration.event&.title,
+                      event_date: registration.event&.start_date,
+                      attendee: registration.user&.name,
                       purchase_date: registration.created_at,
                       quantity: registration.quantity
                     }.to_json
