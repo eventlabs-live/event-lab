@@ -77,7 +77,7 @@ class EventsController < ApplicationController
 
   def destroy
     @event.destroy
-    redirect_to events_url, notice: 'Event was successfully destroyed.'
+    redirect_back fallback_location: events_url, notice: 'Event was successfully destroyed.'
   end
 
   def save_draft

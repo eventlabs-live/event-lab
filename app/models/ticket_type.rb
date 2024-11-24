@@ -1,6 +1,6 @@
 class TicketType < ApplicationRecord
   belongs_to :event
-  has_many :tickets
+  has_many :tickets, dependent: :destroy
   monetize :price, as: "price_cents"
   validates :name, :price, :capacity, presence: true
   # validate :capacity_within_venue_limit
