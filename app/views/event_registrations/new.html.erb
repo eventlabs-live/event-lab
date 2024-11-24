@@ -9,9 +9,9 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
         <h3 class="text-xl font-bold mb-4">Event Details</h3>
-        <p class="mb-2"><%= @event_registration.event.organizer.name %></p>
+        <p class="mb-2"><%= @event_registration.event.organizer.name.capitalize %></p>
         <p class="mb-2">Date: <%= @event_registration.event.start_date.strftime("%A, %d %B %Y") %></p>
-        <p class="mb-2">Time: TBC</p>
+        <p class="mb-2">Time: <%= l @event_registration.event.start_date, format: "%l:%M %p" %></p>
         <p>Location: <%= @event_registration.event.location %></p>
       </div>
       <div class="lg:size-32">

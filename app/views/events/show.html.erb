@@ -1,55 +1,12 @@
 <div class="bg-white shadow rounded p-6 mb-6">
 
-  <h2 class="text-3xl font-bold text-gray-800 mb-4"><%= @event.title %></h2>
-  <p class="text-gray-600 mb-6">At <%= @event.location %></p>
-  <p class="text-gray-600 mb-6"> <%= @event.start_date.localtime.strftime("%Y-%m-%d %H:%M") %>
-    until <%= @event.end_date.localtime.strftime("%Y-%m-%d %H:%M") %></p>
+  <%= render partial: "events/partials/show_details", locals: { event: @event} %>
 
-  <div class="flex flex-row items-center justify-between mb-8">
-  <%= turbo_frame_tag "event_status_#{@event.id}" do %>
-    <p class="flex text-lg px-5 py-2.5 me-2 mb-2 ">Status: <%= @event.status %></p>
-    <% if event_owner? %>
-      <%= link_to 'Edit Status', edit_status_event_path(@event), data: { turbo_frame: "event_status_#{@event.id}" },
-                  class: "flex mb-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+  <% if current_user == @event.organizer %>
 
-    <% end %>
-  <% end %>
-  </div>
-  <% if event_owner? %>
-
-    <div class="flex flex-row justify-start">
-      <%= link_to new_event_check_in_path(@event), class: "inline-block p-2 py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" do %>
-        <div class="">Check In</div>
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-12" viewBox="0 0 24 24">
-          <rect width="24" height="24" fill="none"/>
-          <path fill="currentColor" d="M2 7V2h5v2H4v3zm0 15v-5h2v3h3v2zm15 0v-2h3v-3h2v5zm3-15V4h-3V2h5v5zm-2.5 10.5H19V19h-1.5zm0-3H19V16h-1.5zM16 16h1.5v1.5H16zm-1.5 1.5H16V19h-1.5zM13 16h1.5v1.5H13zm3-3h1.5v1.5H16zm-1.5 1.5H16V16h-1.5zM13 13h1.5v1.5H13zm6-8v6h-6V5zm-8 8v6H5v-6zm0-8v6H5V5zM9.5 17.5v-3h-3v3zm0-8v-3h-3v3zm8 0v-3h-3v3z"/>
-        </svg>
-      <% end %>
-
-      <%= link_to 'Edit', edit_event_path(@event), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
-
-    </div>
+        <%= render partial: "events/partials/event_owner_options", locals: { event: @event} %>
 
   <% end %>
+
+
 </div>
-  <div class="bg-white shadow rounded p-6 mb-6">
-    <h3 class="text-xl font-bold text-gray-800 mb-2">Event Description</h3>
-    <p class="text-gray-700"><%= @event.description %></p>
-    <div>
-      <%= image_tag @event.cover_image, class: "w-full h-full" if @event.cover_image.attached? %>
-    </div>
-  </div>
-
-
-  <div class="bg-white shadow rounded p-6 mb-6">
-    <h3 class="text-xl font-bold text-gray-800 mb-4">Tickets</h3>
-    <button class="flex p-2">
-      <%= link_to 'Register & Buy Tickets', new_event_event_registration_path(@event), class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700" %>
-    </button>
-  </div>
-
-  <% if @event_registrations.present? %>
-    <div class="">
-      <%= render partial: 'event_registrations/index', event_registrations: @event_registrations %>
-    </div>
-  <% end %>
